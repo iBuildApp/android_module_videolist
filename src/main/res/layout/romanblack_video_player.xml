@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/romanblack_video_player_main"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#41464b">
+    
+    <LinearLayout android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_weight="1"
+                  android:orientation="vertical">
+                
+        <ListView android:id="@+id/romanblack_video_player_listview"
+                  android:layout_height="fill_parent"
+                  android:layout_width="fill_parent"/>
+        
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/romanblack_video_player_bottom_panel"
+                  android:layout_height="44dp"
+                  android:layout_width="fill_parent"
+                  android:orientation="horizontal"
+                  android:background="#99000000"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="20dp"
+                  android:paddingRight="20dp"
+                  android:paddingBottom="12dp"
+                  android:paddingTop="12dp">
+                
+        <LinearLayout android:layout_height="fill_parent"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"
+                      android:gravity="left">
+                    
+            <ImageView android:id="@+id/romanblack_video_player_share_btn"
+                       android:layout_height="20dp"
+                       android:layout_width="20dp"
+                       android:src="@drawable/romanblack_video_share"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout android:layout_height="fill_parent"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"
+                      android:gravity="right">
+                    
+            <ImageView android:id="@+id/romanblack_video_player_comment_btn"
+                       android:layout_height="20dp"
+                       android:layout_width="20dp"
+                       android:src="@drawable/romanblack_video_add_comment"/>
+            
+        </LinearLayout>
+                
+    </LinearLayout>
+    
+</LinearLayout>

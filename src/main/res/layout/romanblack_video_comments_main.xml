@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/romanblack_video_comments_main"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#41464b">
+    
+    <FrameLayout android:layout_height="wrap_content"
+                 android:layout_width="fill_parent"
+                 android:layout_weight="1">
+    
+        <LinearLayout android:id="@+id/romanblack_video_comments_main_has_layout"
+                      android:layout_height="fill_parent"
+                      android:layout_width="fill_parent">
+                
+            <ListView android:id="@+id/romanblack_video_comments_main_listview"
+                      android:layout_height="fill_parent"
+                      android:layout_width="fill_parent"/>
+        
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/romanblack_video_comments_main_hasnt_layout"
+                      android:layout_height="fill_parent"
+                      android:layout_width="fill_parent"
+                      android:orientation="vertical">
+                    
+            <LinearLayout android:id="@+id/romanblack_video_comments_main_header"
+                          android:layout_height="wrap_content"
+                          android:layout_width="fill_parent"
+                          android:orientation="vertical"/>
+                    
+            <LinearLayout android:layout_height="wrap_content"
+                          android:layout_width="fill_parent"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:gravity="center_horizontal">
+                        
+                <TextView android:layout_height="wrap_content"
+                          android:layout_width="wrap_content"
+                          android:text="@string/romanblack_video_no_comments_yet"
+                          android:textColor="#afb2b5"
+                          android:textSize="12dp"
+                          android:layout_marginTop="35dp"
+                          android:visibility="invisible"/>
+                        
+                <Button android:id="@+id/romanblack_video_comments_main_post_comment"
+                        android:layout_height="50dp"
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/romanblack_video_btn_add_post"
+                        android:layout_marginTop="35dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:text="@string/romanblack_video_post_comment"
+                        android:paddingBottom="2dp" android:paddingLeft="5dp"
+                        android:paddingRight="5dp"/>
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+    
+    </FrameLayout>
+    
+</LinearLayout>

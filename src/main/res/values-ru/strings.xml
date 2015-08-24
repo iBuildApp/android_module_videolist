@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_clean_upper">Очистить</string>
+    <string name="common_home_upper">Домой</string>
+    <string name="common_back_upper">Назад</string>
+    <string name="common_authorization_upper">Авторизация</string>
+    <string name="romanblack_video_player_comments">Комментарии</string>
+    <string name="romanblack_video_signup_email_in_use">Данный email уже используется. Пожалуйста введите другой email
+    </string>
+    <string name="romanblack_video_no_comments_yet">Комментариев пока нет</string>
+    <string name="romanblack_video_signup_failed">Имя пользователя и пароль не совпадают с нашими данными, попробуйте еще раз</string>
+    <string name="romanblack_video_post_comment">Отправить комментарий</string>
+    <string name="romanblack_video_main_capture">Видео</string>
+    <string name="romanblack_video_player_capture">Видео</string>
+    <string name="romanblack_video_list_share">Поделиться</string>
+    <string name="romanblack_video_list_like">Like</string>
+    <string name="romanblack_video_loading">Загрузка...</string>
+    <string name="romanblack_video_first_name">Имя</string>
+    <string name="romanblack_video_last_name">Фамилия</string>
+    <string name="romanblack_video_email">email</string>
+    <string name="romanblack_video_password">Пароль</string>
+    <string name="romanblack_video_cancel">Отменить</string>
+    <string name="romanblack_video_or">или</string>
+    <string name="romanblack_video_login">Логин</string>
+    <string name="romanblack_video_registration">Регистрация</string>
+    <string name="romanblack_video_sign_up">Создать новый аккаунт</string>
+    <string name="romanblack_video_have_an_account">У меня уже есть учетная запись</string>
+    <string name="romanblack_video_login_failed">Войти не удалось</string>
+    <string name="romanblack_video_login_with_facebook">Войти через Facebook</string>
+    <string name="romanblack_video_login_with_twitter">Войти через Twitter</string>
+    <string name="romanblack_video_login_with_ibuildapp">Войти через iBuildApp</string>
+    <string name="romanblack_video_login_with_email">Войти через Email</string>
+    <string name="romanblack_video_emaillogin_use_email">Использовать email для входа</string>
+    <string name="romanblack_video_emailsignup_terms">Нажимая кнопку «Зарегистрироваться», Вы принимаете условия
+        Пользовательского соглашения.
+    </string>
+    <string name="romanblack_video_date_just_now">Сейчас</string>
+    <string name="romanblack_video_date_one_minute">1 минуту назад</string>
+    <string name="romanblack_video_date_minutes">минут назад</string>
+    <string name="romanblack_video_date_one_hour">1 час назад</string>
+    <string name="romanblack_video_date_hours">часов назад</string>
+    <string name="romanblack_video_date_yesterday">Вчера</string>
+    <string name="romanblack_video_date_days">дней назад</string>
+    <string name="romanblack_video_alert_cannot_init">Невозможно инициализировать видио плагин</string>
+    <string name="romanblack_video_alert_share_need_internet">Требуется интернет подключение</string>
+    <string name="romanblack_video_alert_like_need_internet">Требуется интернет подключение</string>
+    <string name="romanblack_video_alert_no_internet">Мобильный интернет отключен. Включите интернет, либо используйте
+        WiFi
+    </string>
+    <string name="romanblack_video_alert_link_not_valid">Видео по ссылке недоступно</string>
+    <string name="romanblack_video_alert_facebook_authorization_failed">Не удалось войти в Twitter</string>
+    <string name="romanblack_video_alert_twitter_authorization_failed">Не удалось войти в Facebook</string>
+    <string name="romanblack_video_alert_email_authorization_failed">Не удалось войти c помощью email</string>
+    <string name="romanblack_video_alert_email_invalid">Некорректный email</string>
+    <string name="romanblack_video_alert_fill_all_fields">Заполните все поля</string>
+    <string name="romanblack_video_alert_names_match_each">Имя и Фамилия совпадают. Похоже на спам, пожалуйста, измените
+        Имя либо Фамилию
+    </string>
+    <string name="romanblack_video_shared_on_facebook">Добавлено на Facebook</string>
+    <string name="romanblack_video_shared_on_twitter">Добавлено на Twitter</string>
+    <string name="romanblack_video_alert_short_name">Имя должно содержать как минимум два символа</string>
+    <string name="romanblack_video_alert_enter_correct_email">Введите корректный email</string>
+    <string name="romanblack_video_alert_short_password">Пароль должен содержать как минимум два символа</string>
+    <string name="romanblack_video_alert_passwords_dont_match">Пароль должен содержать как минимум два символа</string>
+    <string name="romanblack_video_alert_press_play">"Нажмите кнопку ""play"""</string>
+    <string name="romanblack_video_alert_image_cannot_be_selected">Изображение не может быть выбрано</string>
+    <string name="romanblack_video_alert_empty_message">Невозможно отправить пустой комментарий</string>
+    <string name="romanblack_video_alert_message_is_too_long">Сообщение слишком длинное!</string>
+    <string name="romanblack_video_alert_big_text">Длина текста должна быть меньше 150 символов</string>
+    <string name="romanblack_video_sharing_first_part">только что добавлен комментарий</string>
+    <string name="romanblack_video_sharing_second_part">Видео через</string>
+    <string name="romanblack_video_sharing_third_part">Загрузить через iPhone/Android</string>
+    <string name="romanblack_video_sharingsms_first_part">Я нашел видео</string>
+    <string name="romanblack_video_sharingsms_second_part">используя приложение</string>
+    <string name="romanblack_video_sharingsms_third_part">для Android, думаю, тебе понравится. Загрузить приложение</string>
+    <string name="romanblack_video_sharingsms_fourth_part">для iPhone/Android:</string>
+    <string name="login">Логин</string>
+    <string name="home">Домой</string>
+    <string name="back">Назад</string>
+    <string name="signup">Зарегистрироваться</string>
+    <string name="post">Отправить</string>
+    <string name="loading">Loading</string>
+
+    <string name="directoryplugin_twitter_posted_success">Добавлено на Twitter</string>
+    <string name="directoryplugin_twitter_posted_error">Не добавлено на Twitter</string>
+    <string name="directoryplugin_facebook_posted_success">Добавлено на Facebook</string>
+    <string name="directoryplugin_facebook_posted_error">Не добавлено на Facebook</string>
+</resources>
