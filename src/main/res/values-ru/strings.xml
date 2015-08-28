@@ -48,8 +48,8 @@
         WiFi
     </string>
     <string name="romanblack_video_alert_link_not_valid">Видео по ссылке недоступно</string>
-    <string name="romanblack_video_alert_facebook_authorization_failed">Не удалось войти в Twitter</string>
-    <string name="romanblack_video_alert_twitter_authorization_failed">Не удалось войти в Facebook</string>
+    <string name="romanblack_video_alert_facebook_authorization_failed">Не удалось войти в Facebook</string>
+    <string name="romanblack_video_alert_twitter_authorization_failed">Не удалось войти в Twitter</string>
     <string name="romanblack_video_alert_email_authorization_failed">Не удалось войти c помощью email</string>
     <string name="romanblack_video_alert_email_invalid">Некорректный email</string>
     <string name="romanblack_video_alert_fill_all_fields">Заполните все поля</string>

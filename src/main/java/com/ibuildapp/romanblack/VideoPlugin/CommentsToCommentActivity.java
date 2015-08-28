@@ -1,13 +1,13 @@
 /****************************************************************************
-*                                                                           *
-*  Copyright (C) 2014-2015 iBuildApp, Inc. ( http://ibuildapp.com )         *
-*                                                                           *
-*  This file is part of iBuildApp.                                          *
-*                                                                           *
-*  This Source Code Form is subject to the terms of the iBuildApp License.  *
-*  You can obtain one at http://ibuildapp.com/license/                      *
-*                                                                           *
-****************************************************************************/
+ *                                                                           *
+ *  Copyright (C) 2014-2015 iBuildApp, Inc. ( http://ibuildapp.com )         *
+ *                                                                           *
+ *  This file is part of iBuildApp.                                          *
+ *                                                                           *
+ *  This Source Code Form is subject to the terms of the iBuildApp License.  *
+ *  You can obtain one at http://ibuildapp.com/license/                      *
+ *                                                                           *
+ ****************************************************************************/
 package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.app.ProgressDialog;
@@ -130,7 +130,7 @@ public class CommentsToCommentActivity extends AppBuilderModuleMain implements
                 case NEED_INTERNET_CONNECTION: {
                     Toast.makeText(CommentsToCommentActivity.this,
                             getResources().getString(
-                            R.string.romanblack_video_alert_no_internet),
+                                    R.string.romanblack_video_alert_no_internet),
                             Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -241,12 +241,12 @@ public class CommentsToCommentActivity extends AppBuilderModuleMain implements
         View view = getLayoutInflater().inflate(R.layout.romanblack_video_write_btn, null);
         ImageView image = (ImageView) view.findViewById(R.id.romanblack_video_main_comments_voice);
         image.setColorFilter(bottomBarDesign.leftButtonDesign.textColor);
-        setTopBarRightVeiw(view, true,
+        setTopBarRightButton(view, getString(R.string.post),
                 new OnClickListener() {
-            public void onClick(View arg0) {
-                postCommentButtonClick();
-            }
-        });
+                    public void onClick(View arg0) {
+                        postCommentButtonClick();
+                    }
+                });
 
         handler.sendEmptyMessage(SHOW_PROGRESS_DIALOG);
 
@@ -274,7 +274,7 @@ public class CommentsToCommentActivity extends AppBuilderModuleMain implements
                     try {
                         FileInputStream fis = new FileInputStream(
                                 cachePath + "/" + "ca-" + videoItem.getId()
-                                + "-" + item.getId());
+                                        + "-" + item.getId());
                         ObjectInputStream ois = new ObjectInputStream(fis);
                         comments = (ArrayList<CommentItem>) ois.readObject();
                         ois.close();
