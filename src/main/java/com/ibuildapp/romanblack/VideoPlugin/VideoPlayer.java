@@ -234,6 +234,9 @@ public class VideoPlayer extends AppBuilderModuleMain implements OnClickListener
         } catch (NullPointerException nPEx) {
         }
         postCommentButton.setOnClickListener(this);
+        if (Statics.commentsOn.equals("on"))
+            postCommentButton.setVisibility(View.VISIBLE);
+        else postCommentButton.setVisibility(View.GONE);
 
         bottomPanel = (LinearLayout) findViewById(R.id.romanblack_video_player_bottom_panel);
 

@@ -489,14 +489,12 @@ public class MediaAdapter extends BaseAdapter {
         }
 
         public void onClick(View arg0) {
-            if (Statics.commentsOn.equals("on")) {
-                Intent it = new Intent(ctx, VideoPlayer.class);
-                it.putExtra("items", items);
-                it.putExtra("position", position);
-                it.putExtra("cachePath", cachePath);
-                it.putExtra("Widget", widget);
-                ctx.startActivity(it);
-            }
+            Intent it = new Intent(ctx, VideoPlayer.class);
+            it.putExtra("items", items);
+            it.putExtra("position", position);
+            it.putExtra("cachePath", cachePath);
+            it.putExtra("Widget", widget);
+            ctx.startActivity(it);
         }
     }
     /* CallBack for Facebook likes*/
