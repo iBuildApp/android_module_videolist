@@ -241,12 +241,19 @@ public class CommentsToCommentActivity extends AppBuilderModuleMain implements
         View view = getLayoutInflater().inflate(R.layout.romanblack_video_write_btn, null);
         ImageView image = (ImageView) view.findViewById(R.id.romanblack_video_main_comments_voice);
         image.setColorFilter(bottomBarDesign.leftButtonDesign.textColor);
-        setTopBarRightButton(view, getString(R.string.post),
-                new OnClickListener() {
-                    public void onClick(View arg0) {
-                        postCommentButtonClick();
-                    }
-                });
+
+        if (Statics.commentsOn.equals("on")) {
+            setTopBarRightButton(view, getString(R.string.post),
+                    new OnClickListener() {
+                        public void onClick(View arg0) {
+                            postCommentButtonClick();
+                        }
+                    });
+            postCommentButton.setVisibility(View.VISIBLE);
+        }
+        else postCommentButton.setVisibility(View.GONE);
+
+
 
         handler.sendEmptyMessage(SHOW_PROGRESS_DIALOG);
 

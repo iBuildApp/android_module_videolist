@@ -73,11 +73,15 @@
                       android:layout_width="fill_parent"
                       android:layout_height="55dp"
                       android:textColor="#66000000"
+                      android:lines="1"
+                      android:singleLine="true"
                       android:layout_marginTop="30dp"/>
                 
             <EditText android:id="@+id/romanblack_video_emailsignup_lname"
                       android:layout_width="fill_parent"
                       android:textColor="#66000000"
+                    android:lines="1"
+                    android:singleLine="true"
                       android:layout_height="55dp"/>
                 
             <EditText android:id="@+id/romanblack_video_emailsignup_email"
