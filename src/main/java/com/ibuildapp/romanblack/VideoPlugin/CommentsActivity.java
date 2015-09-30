@@ -561,7 +561,7 @@ public class CommentsActivity extends AppBuilderModuleMain implements
             NetworkInfo ni = cm.getActiveNetworkInfo();
 
             if (ni != null) {
-                if (ni.isConnectedOrConnecting()) {
+                if (ni.isConnectedOrConnecting() && Statics.commentsOn.equals("on")) {
                     if (!Authorization.isAuthorized()) {
                         actionIntent = new Intent(this, SendMessageActivity.class);
                         actionIntent.putExtra("Widget", widget);

@@ -36,7 +36,7 @@
             <ImageView android:id="@+id/romanblack_video_player_share_btn"
                        android:layout_height="20dp"
                        android:layout_width="20dp"
-                       android:src="@drawable/romanblack_video_share"/>
+                       android:src="@drawable/video_list_share"/>
             
         </LinearLayout>
         
@@ -48,7 +48,7 @@
             <ImageView android:id="@+id/romanblack_video_player_comment_btn"
                        android:layout_height="20dp"
                        android:layout_width="20dp"
-                       android:src="@drawable/romanblack_video_add_comment"/>
+                       android:src="@drawable/video_list_add_comment"/>
             
         </LinearLayout>
                 
