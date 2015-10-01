@@ -3,4 +3,4 @@
            android:id="@+id/romanblack_video_main_comments_voice"
            android:layout_height="50dp"
            android:layout_width="32dp"
-           android:src="@drawable/romanblack_video_share"/>
+           android:src="@drawable/video_list_add_comment"/>

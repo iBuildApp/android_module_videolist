@@ -582,27 +582,29 @@ public class CommentsToCommentActivity extends AppBuilderModuleMain implements
         NetworkInfo ni = cm.getActiveNetworkInfo();
 
         if (ni != null) {
-            if (ni.isConnectedOrConnecting()) {
-                if (!Authorization.isAuthorized()) {
-                    actionIntent = new Intent(this, SendMessageActivity.class);
-                    actionIntent.putExtra("Widget", widget);
-                    actionIntent.putExtra("video", videoItem);
-                    actionIntent.putExtra("message", item);
+            if (Statics.commentsOn.equals("on")) {
+                if (ni.isConnectedOrConnecting()) {
+                    if (!Authorization.isAuthorized()) {
+                        actionIntent = new Intent(this, SendMessageActivity.class);
+                        actionIntent.putExtra("Widget", widget);
+                        actionIntent.putExtra("video", videoItem);
+                        actionIntent.putExtra("message", item);
 
-                    action = ACTIONS.SEND_MESSAGE;
+                        action = ACTIONS.SEND_MESSAGE;
 
-                    Intent it = new Intent(this, AuthorizationActivity.class);
-                    it.putExtra("Widget", widget);
-                    startActivityForResult(it, AUTHORIZATION_ACTIVITY);
+                        Intent it = new Intent(this, AuthorizationActivity.class);
+                        it.putExtra("Widget", widget);
+                        startActivityForResult(it, AUTHORIZATION_ACTIVITY);
+                    } else {
+                        Intent it = new Intent(this, SendMessageActivity.class);
+                        it.putExtra("Widget", widget);
+                        it.putExtra("video", videoItem);
+                        it.putExtra("message", item);
+                        startActivityForResult(it, SEND_COMMENT_ACTIVITY);
+                    }
                 } else {
-                    Intent it = new Intent(this, SendMessageActivity.class);
-                    it.putExtra("Widget", widget);
-                    it.putExtra("video", videoItem);
-                    it.putExtra("message", item);
-                    startActivityForResult(it, SEND_COMMENT_ACTIVITY);
+                    handler.sendEmptyMessage(NEED_INTERNET_CONNECTION);
                 }
-            } else {
-                handler.sendEmptyMessage(NEED_INTERNET_CONNECTION);
             }
         }
     }
