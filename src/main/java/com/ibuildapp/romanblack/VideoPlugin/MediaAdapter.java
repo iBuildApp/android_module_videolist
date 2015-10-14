@@ -145,8 +145,8 @@ public class MediaAdapter extends BaseAdapter {
         LinearLayout shareButton = (LinearLayout) arg1.findViewById(R.id.romanblack_video_listview_item_share_btn);
         shareButton.setOnClickListener(new btnShareListener(arg0));
         if (Statics.sharingOn.equalsIgnoreCase("off")) {
-            shareButton.setVisibility(View.INVISIBLE);
-        }
+            shareButton.setVisibility(View.GONE);
+        }else shareButton.setVisibility(View.VISIBLE);
 
         LinearLayout likeButton = (LinearLayout) arg1.findViewById(R.id.romanblack_video_listview_item_like_btn);
         likeButton.setOnClickListener(new btnLikeListener(arg0));
