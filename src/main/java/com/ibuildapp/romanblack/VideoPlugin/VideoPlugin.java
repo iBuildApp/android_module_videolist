@@ -28,6 +28,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
@@ -96,6 +99,91 @@ public class VideoPlugin extends AppBuilderModuleMain implements
     private ListView listView = null;
     private ProgressDialog progressDialog = null;
     private ArrayList<VideoItem> items = new ArrayList<VideoItem>();
+
+    private String html2 = "\n" +
+            "            \n" +
+            "            <html><head></head><body>             <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n" +
+            "<style type=\"text/css\">\n" +
+            "* {\n" +
+            "    -webkit-text-size-adjust: none;\n" +
+            "    outline: none;\n" +
+            "    -webkit-touch-callout: none;\n" +
+            "    -webkit-tap-highlight-color:rgba(0,0,0,0);\n" +
+            "}\n" +
+            "body { margin: 0; padding: 0; height: 100%;  }\n" +
+            "#innerContent * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }\n" +
+            "#innerContent {\n" +
+            "    display: block; height: 100%; height: auto; min-height: 100%; margin: 0; padding: 0;\n" +
+            "    color: #ffffff; font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.3;\n" +
+            "    background: fixed #2471a0 url(http://ibuildapp.com/images/sberapp/sberbank-bg.png) 0 0 no-repeat;\n" +
+            "    background-size: 100%;\n" +
+            "}\n" +
+            "#innerContent .inner_title { background-color: #2376d7; text-align: center; height: 60px; line-height: 60px; color: #ffffff; font-size: 17px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; position: relative; }\n" +
+            "#innerContent .inner_title:before {\n" +
+            "    content:''; display: block; width: 24px; height: 19px;\n" +
+            "    background: url(http://ibuildapp.com/images/sberapp/icon_photo.png) 0 0 no-repeat;\n" +
+            "    background-size: 100%;\n" +
+            "    position: absolute; top: 50%; margin-top: -10px; left: 30px;\n" +
+            "}\n" +
+            "#innerContent .contSample { padding: 45px 0 20px; }\n" +
+            "#innerContent .contSample .btns { margin: 0 0 35px; padding: 0; list-style: none; }\n" +
+            "#innerContent .contSample .btns li { display: block; margin-bottom: 12px; text-align: center; }\n" +
+            "#innerContent .contSample .btns li a {\n" +
+            "    display: block; text-decoration: none; width: 253px; height: 48px; margin: 0 auto;\n" +
+            "    text-align: left; font-size: 20px !important; line-height: 46px; letter-spacing: 0.05em;\n" +
+            "}\n" +
+            "#innerContent .contSample .btns li a span { display: inline-block; padding-left: 68px; }\n" +
+            "#innerContent .contSample .btns li a.btn_best {\n" +
+            "    background: url(http://ibuildapp.com/images/sberapp/btn_p1.png) no-repeat 0 0;\n" +
+            "    background-size: contain; color: #2376d7;\n" +
+            "}\n" +
+            "#innerContent .contSample .btns li a.btn_all {\n" +
+            "    background: url(http://ibuildapp.com/images/sberapp/btn_p2.png) no-repeat 0 0;\n" +
+            "    background-size: contain; color: #ffffff;\n" +
+            "}\n" +
+            "#innerContent .contSample .btns li a.btn_face {\n" +
+            "    background: url(http://ibuildapp.com/images/sberapp/btn_p3.png) no-repeat 0 0;\n" +
+            "    background-size: contain; color: #ffffff;\n" +
+            "}\n" +
+            "#innerContent .contSample .btns li a.btn_main {\n" +
+            "    background: url(http://ibuildapp.com/images/sberapp/btn_main.png) no-repeat 0 0;\n" +
+            "    background-size: contain; color: #15689b;\n" +
+            "}\n" +
+            ".html-preview {\n" +
+            "    zoom: 100%;-webkit-transform-origin:0 0;-webkit-transform:scale(1);-moz-transform-origin:0 0;-moz-transform:scale(1);-o-transform-origin:0 0;-o-transform:scale(1);\n" +
+            "    padding: 0;\n" +
+            "}\n" +
+            "</style>\n" +
+            "\n" +
+            "<div id=\"innerContent\">\n" +
+            "\t<div class=\"contSample\">\n" +
+            "\t\t<ul class=\"btns\">\n" +
+            "            <li><a href=\"javascript:window.location.href='ibuildapp.com-1915109://?widget=1001';\" class=\"btn_main\"><span>Главное меню</span></a></li>\n" +
+            "        </ul>\n" +
+            "    </div>\n" +
+            "</div>\n" +
+            "<script type=\"text/javascript\">\n" +
+            "if ( typeof $ === 'function' ) {\n" +
+            "\tvar noConflict = $.noConflict();\n" +
+            "\t$ = noConflict;\n" +
+            "}\n" +
+            "var script = document.createElement('script');\n" +
+            "script.onload = function() {\n" +
+            "  $(document).ready(function(){\n" +
+            "    $( window ).resize( function() {\n" +
+            "\t\t$( '#innerContent' ).height($(window).height()).css({'min-height': '100%'});\n" +
+            "    } );\n" +
+            "  } );\n" +
+            "  if ( typeof noConflict === 'function' ) {\n" +
+            "\t$ = noConflict;\n" +
+            "  }\n" +
+            "};\n" +
+            "script.src = \"http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\";\n" +
+            "document.getElementsByTagName('head')[0].appendChild(script);\n" +
+            "</script>\n" +
+            "            </body></html>            \n" +
+            "         ";
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message message) {
@@ -146,6 +234,7 @@ public class VideoPlugin extends AppBuilderModuleMain implements
             }
         }
     };
+    private WebView webView;
 
     @Override
     public void create() {
@@ -523,6 +612,29 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         adapter.setfBLikePressedListener(this);
         adapter.setSharePressedListener(this);
         listView.setAdapter(adapter);
+        webView = (WebView) findViewById(R.id.photogallery_albums_web);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadData(html2, "text/html; charset=UTF-8", null);
+
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.contains("ibuildapp.com-1915109")) {
+                    String param = Uri.parse(url).getQueryParameter("widget");
+                    finish();
+                    if (param != null && param.equals("1001"))
+                        com.appbuilder.sdk.android.Statics.launchMain();
+                    else if (param != null && !"".equals(param)) {
+                        View.OnClickListener widget = com.appbuilder.sdk.android.Statics.linkWidgets.get(Integer.valueOf(param));
+                        if (widget != null)
+                            widget.onClick(view);
+                    }
+                    return false;
+                }
+                return false;
+            }
+        });
 
         Statics.onCommentPushedListeners.add(this);
 
