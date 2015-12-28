@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -635,6 +636,17 @@ public class VideoPlugin extends AppBuilderModuleMain implements
                 return false;
             }
         });
+
+        SharedPreferences prefs = getSharedPreferences("is_sber", MODE_PRIVATE);
+        String sber_id = prefs.getString("appid", null);
+
+        if(sber_id != null) {
+            if(!sber_id.equals("1915109")){
+
+                webView.setVisibility(View.GONE);
+            }//"No name defined" is the default value.
+            //int// idName = prefs.getInt("idName", 0); //0 is the default value.
+        }
 
         Statics.onCommentPushedListeners.add(this);
 
