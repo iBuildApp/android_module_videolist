@@ -11,6 +11,7 @@
 package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,11 +21,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
+
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
-import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.MediaPlayer.OnBufferingUpdateListener;
-import io.vov.vitamio.MediaPlayer.OnInfoListener;
-import io.vov.vitamio.widget.VideoView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,7 +31,7 @@ import java.util.List;
 /**
  * This activity represents custom video player that plays m3u8 strem videos.
  */
-public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener, OnBufferingUpdateListener {
+public class VideoBuffer extends AppBuilderModuleMain implements MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
 
     Integer position;
     List<VideoItem> items;
@@ -47,7 +46,7 @@ public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener,
 
     @Override
     public void destroy() {
-        mVideoView.stop();
+        mVideoView.stopPlayback();
         super.destroy();
 
 
@@ -115,11 +114,11 @@ public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener,
         });
         controls = (LinearLayout) findViewById(R.id.romanblack_video_playerweb_contolpanel);
         controls.setVisibility(View.INVISIBLE);
-        mVideoView.setOnBufferingUpdateListener(this);
+       // mVideoView.setOnBufferingUpdateListener(this);
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setPlaybackSpeed(1.0f);
+           //     mediaPlayer.setPlaybackSpeed(1.0f);
             }
         });
         mVideoView.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +151,7 @@ public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener,
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mVideoView.stop();
+               // mVideoView.stop();
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("items", (Serializable) items);
@@ -166,7 +165,7 @@ public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener,
         buttonPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mVideoView.stop();
+               // mVideoView.stop();
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("items", (Serializable) items);
@@ -213,9 +212,9 @@ public class VideoBuffer extends AppBuilderModuleMain implements OnInfoListener,
                     buttonPlay.setImageResource(R.drawable.romanblack_video_pause);
                 }
                 break;
-            case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
+            /*case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
                 downloadRateView.setText("" + extra + "kb/s" + "  ");
-                break;
+                break;*/
         }
         return true;
     }
