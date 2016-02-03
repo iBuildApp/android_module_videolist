@@ -43,6 +43,7 @@ public class EntityParser {
     private String appName = "";
     private String sharingOn = "off";
     private String commentsOn = "off";
+    private String likesOn = "on";
 
     /**
      * Constructs new EntityParser instance.
@@ -144,6 +145,13 @@ public class EntityParser {
         allowCommentsElement.setEndTextElementListener(new EndTextElementListener() {
             public void end(String arg0) {
                 commentsOn = arg0.trim();
+            }
+        });
+
+        android.sax.Element allowlikesElement = root.getChild("allowlikes");
+        allowlikesElement.setEndTextElementListener(new EndTextElementListener() {
+            public void end(String arg0) {
+                likesOn = arg0.trim();
             }
         });
 
@@ -267,6 +275,10 @@ public class EntityParser {
      */
     public String getCommentsOn() {
         return commentsOn;
+    }
+
+    public String getLikesOn() {
+        return likesOn;
     }
 
     /**

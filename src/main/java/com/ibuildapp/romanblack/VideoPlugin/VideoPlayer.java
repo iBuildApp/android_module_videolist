@@ -91,6 +91,8 @@ public class VideoPlayer extends AppBuilderModuleMain implements OnClickListener
     private LinearLayout bottomPanel = null;
     private ArrayList<VideoItem> items = null;
     private ArrayList<CommentItem> comments = null;
+    private View likeLayout;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message message) {
@@ -200,6 +202,11 @@ public class VideoPlayer extends AppBuilderModuleMain implements OnClickListener
 
         videoTitleTextView = (TextView) headerView.findViewById(R.id.romanblack_video_player_video_title);
         videoTitleTextView.setText(item.getTitle());
+
+        likeLayout = headerView.findViewById(R.id.video_detail_like_layout);
+        if (Statics.likesOn.equalsIgnoreCase("on")) {
+            likeLayout.setVisibility(View.VISIBLE);
+        }else likeLayout.setVisibility(View.INVISIBLE);
 
         likesCountTextView = (TextView) headerView.findViewById(R.id.romanblack_video_player_comments_header_likes_count);
         likesCountTextView.setText(item.getLikesCount() + "");

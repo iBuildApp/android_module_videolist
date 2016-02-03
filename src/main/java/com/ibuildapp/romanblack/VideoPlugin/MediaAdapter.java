@@ -11,14 +11,11 @@
 package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.SystemClock;
@@ -147,6 +144,11 @@ public class MediaAdapter extends BaseAdapter {
         if (Statics.sharingOn.equalsIgnoreCase("off")) {
             shareButton.setVisibility(View.GONE);
         }else shareButton.setVisibility(View.VISIBLE);
+
+        LinearLayout likeLayout = (LinearLayout) arg1.findViewById(R.id.video_listview_item_like_layout);
+        if (Statics.likesOn.equalsIgnoreCase("on")) {
+            likeLayout.setVisibility(View.VISIBLE);
+        }else likeLayout.setVisibility(View.INVISIBLE);
 
         LinearLayout likeButton = (LinearLayout) arg1.findViewById(R.id.romanblack_video_listview_item_like_btn);
         likeButton.setOnClickListener(new btnLikeListener(arg0));

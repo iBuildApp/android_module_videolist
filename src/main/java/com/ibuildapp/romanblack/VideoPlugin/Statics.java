@@ -35,6 +35,7 @@ public class Statics {
     static String canEdit = "all";
     static String sharingOn = "off";
     static String commentsOn = "off";
+    public static String likesOn = "on";
     /*Color Scheme*/
     static int color1 = Color.parseColor("#4d4948");// background
     static int color2 = Color.parseColor("#fff58d");// category header
