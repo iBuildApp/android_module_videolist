@@ -36,7 +36,9 @@
         
         </FrameLayout>
                 
-        <LinearLayout android:layout_height="70dp"
+        <LinearLayout
+                    android:id="@+id/video_listview_bottom_layout"
+                    android:layout_height="70dp"
                       android:layout_width="wrap_content"
                       android:layout_weight="1"
                       android:orientation="vertical"

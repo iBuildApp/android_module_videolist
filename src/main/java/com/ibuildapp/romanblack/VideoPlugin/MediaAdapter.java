@@ -150,6 +150,10 @@ public class MediaAdapter extends BaseAdapter {
             likeLayout.setVisibility(View.VISIBLE);
         }else likeLayout.setVisibility(View.GONE);
 
+        View view = arg1.findViewById(R.id.video_listview_bottom_layout);
+        if (Statics.likesOn.equalsIgnoreCase("off") && Statics.sharingOn.equalsIgnoreCase("off"))
+            view.setVisibility(View.GONE);
+
         LinearLayout likeButton = (LinearLayout) arg1.findViewById(R.id.romanblack_video_listview_item_like_btn);
         likeButton.setOnClickListener(new btnLikeListener(arg0));
 
