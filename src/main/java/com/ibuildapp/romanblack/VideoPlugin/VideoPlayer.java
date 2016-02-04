@@ -32,7 +32,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -382,82 +381,6 @@ public class VideoPlayer extends AppBuilderModuleMain implements OnClickListener
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.add("Facebook").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                if (Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_FACEBOOK) != null) {
-//                    shareFacebook();
-//                } else {
-//                    action = ACTIONS.FACEBOOK_SHARE;
-//                    Authorization.authorize(VideoPlayer.this, FACEBOOK_AUTH, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-//                }
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add("Twitter").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                if (Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_TWITTER) != null) {
-//                    shareTwitter();
-//                } else {
-//                    Authorization.authorize(VideoPlayer.this, TWITTER_AUTH, Authorization.AUTHORIZATION_TYPE_TWITTER);
-//                }
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add("Email").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " " + item.getUrl()
-//                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-//                        + " "
-//                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-//
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                emailIntent.setType("text/html");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(text));
-//                startActivity(emailIntent);
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add("SMS").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " " + item.getUrl()
-//                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-//                        + " "
-//                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-//
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
-//                intent.putExtra("sms_body", text);
-//                startActivity(intent);
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add(getString(R.string.romanblack_video_cancel)).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-
         return false;
     }
 
@@ -827,7 +750,7 @@ public class VideoPlayer extends AppBuilderModuleMain implements OnClickListener
             if ((comment.getReplyId() == 0)
                     && (comment.getTrackId() == item.getId())) {
                 if (comments == null) {
-                    comments = new ArrayList<CommentItem>();
+                    comments = new ArrayList<>();
                 }
 
                 comments.add(comment);

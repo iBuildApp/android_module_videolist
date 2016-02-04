@@ -10,12 +10,8 @@
 ****************************************************************************/
 package com.ibuildapp.romanblack.VideoPlugin;
 
-import static android.app.Activity.RESULT_OK;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -30,9 +26,6 @@ import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.FacebookAuthorizationActivity;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.Parameter;
-import com.restfb.exception.FacebookOAuthException;
-import com.restfb.types.FacebookType;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;

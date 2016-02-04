@@ -223,52 +223,6 @@ public class JSONParser {
 
         return (HashMap<String, String>) FacebookAuthorizationActivity.getLikesForUrls(urlList, token);
 
-
-//        try {
-//            HashMap<String, String> result = new HashMap<String, String>();
-//
-//            String tokenUrl = "https://graph.facebook.com/oauth/access_token?"
-//                    + "client_id="
-//                    + com.appbuilder.sdk.android.Statics.FACEBOOK_APP_ID +
-//                    "&client_secret="
-//                    + com.appbuilder.sdk.android.Statics.FACEBOOK_APP_SECRET +
-//                    "&grant_type=client_credentials";
-//
-//            String accessResult = loadURLData(tokenUrl);
-//
-//            Statics.FACEBOOK_APP_TOKEN = accessResult.split("=")[1];
-//
-//            StringBuilder sb = new StringBuilder();
-//            for (int i = 0; i < items.size(); i++) {
-//                sb.append("\"");
-//                sb.append(URLEncoder.encode(items.get(i).getUrl()));
-//                sb.append("\"");
-//                sb.append(",");
-//            }
-//
-//            String urls = sb.toString().substring(0, sb.length() - 1);
-//
-//            String likesResult = loadURLData("https://graph.facebook.com/fql?"
-//                    + "q=SELECT+total_count,+url+FROM+link_stat+WHERE+url+IN+("
-//                    + urls + ")&access_token=" + Statics.FACEBOOK_APP_TOKEN);
-//
-//            JSONObject mainObject = new JSONObject(likesResult);
-//            JSONArray likesJSONArray = mainObject.getJSONArray("data");
-//
-//            for (int i = 0; i < likesJSONArray.length(); i++) {
-//                JSONObject likeObject = likesJSONArray.getJSONObject(i);
-//                result.put(likeObject.getString("url"),
-//                        likeObject.getString("total_count"));
-//            }
-//
-//            Log.d("", "");
-//
-//            return result;
-//        } catch (Exception ex) {
-//            Log.d("", "");
-//
-//            return null;
-//        }
     }
 
     /**

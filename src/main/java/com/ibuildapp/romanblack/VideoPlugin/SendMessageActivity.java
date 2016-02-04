@@ -11,7 +11,6 @@
 package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -20,15 +19,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
@@ -71,7 +66,6 @@ public class SendMessageActivity extends AppBuilderModuleMain implements
     private TextView cancelButton = null;
     private TextView clearButton = null;
     private TextView postButton = null;
-//    private TextView symbolCounter = null;
     private static final String EN_LENGTH = "/150";
     private static final String NOT_EN_LENGTH = "/75";
     private CharsetEncoder charsetEncoder = Charset.forName("US-ASCII").newEncoder();
@@ -119,7 +113,6 @@ public class SendMessageActivity extends AppBuilderModuleMain implements
         mainLayout.setBackgroundColor(Statics.color1);
 
         messageEditText = (EditText) findViewById(R.id.romanblack_video_sendmessage_edittext);
-        //messageEditText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         messageEditText.addTextChangedListener(this);
 
         cancelButton = (TextView) findViewById(R.id.romanblack_fanwall_sendmessage_cancelbtn);
@@ -148,8 +141,6 @@ public class SendMessageActivity extends AppBuilderModuleMain implements
         } catch (NullPointerException nPEx) {
         }
         postButton.setOnClickListener(this);
-
-//        symbolCounter = (TextView) findViewById(R.id.romanblack_fanwall_sendmessage_symbols_counter);
     }
 
     @Override
@@ -398,29 +389,12 @@ public class SendMessageActivity extends AppBuilderModuleMain implements
             messageBuffer = arg0.toString();
         }
 
-//        if(charsetEncoder.canEncode(arg0)) {
-//            messageEditText.setFilters(new InputFilter[]{
-//                    new InputFilter.LengthFilter(150)
-//            });
-//            length = EN_LENGTH;
-//        } else {
-//            messageEditText.setFilters(new InputFilter[]{
-//                    new InputFilter.LengthFilter(75)
-//            });
-//            length = NOT_EN_LENGTH;
-//        }
-
     }
 
     /**
      * Updates symbol counter when message text was changed.
      */
     public void afterTextChanged(Editable arg0) {
-//        if (symbolCounter == null) {
-//            symbolCounter = (TextView) findViewById(R.id.romanblack_fanwall_sendmessage_symbols_counter);
-//        }
-
-//        symbolCounter.setText(arg0.length() + length);
     }
 
     private void showProgressDialog() {

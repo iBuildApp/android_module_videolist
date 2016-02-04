@@ -23,7 +23,7 @@ public interface OnCommentPushedListener {
      * This callback is invoked when new comment was pushed.
      * @param item new comment
      */
-    public void onCommentPushed(CommentItem item);
+    void onCommentPushed(CommentItem item);
 
     /**
      * This callback is invoked when the comment list was updated.
@@ -33,5 +33,5 @@ public interface OnCommentPushedListener {
      * @param newCommentsCount new comments count
      * @param comments updated comments list
      */
-    public void onCommentsUpdate(VideoItem item, CommentItem commentItem, int count, int newCommentsCount, ArrayList<CommentItem> comments);
+    void onCommentsUpdate(VideoItem item, CommentItem commentItem, int count, int newCommentsCount, ArrayList<CommentItem> comments);
 }

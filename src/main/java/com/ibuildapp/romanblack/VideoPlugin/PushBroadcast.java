@@ -18,7 +18,7 @@ import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.entities.User;
 
 /**
- * This class recieves information about comment updates.
+ * This class receives information about comment updates.
  */
 public class PushBroadcast extends BroadcastReceiver {
 

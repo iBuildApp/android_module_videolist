@@ -174,7 +174,7 @@ public class VideoItem implements Serializable {
 
     /**
      * Sets the comments count that was made on this video.
-     * @param totalComments the comments count to set
+     * @param likesCount the likes count to set
      */
     public void setLikesCount(int likesCount) {
         this.likesCount = likesCount;

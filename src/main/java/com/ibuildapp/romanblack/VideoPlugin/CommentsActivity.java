@@ -57,7 +57,7 @@ public class CommentsActivity extends AppBuilderModuleMain implements
     private enum ACTIONS {
 
         ACTION_NO, SEND_MESSAGE
-    };
+    }
     private final int AUTHORIZATION_ACTIVITY = 10000;
     private final int MESSAGE_VIEW_ACTIVITY = 10001;
     private final int SEND_COMMENT_ACTIVITY = 10003;

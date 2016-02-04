@@ -18,5 +18,5 @@ public interface OnPostListener {
     /**
      * This callback is invoked when user made a comment.
      */
-    public void onPost();
+    void onPost();
 }

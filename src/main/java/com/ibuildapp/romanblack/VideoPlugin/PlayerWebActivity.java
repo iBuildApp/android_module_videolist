@@ -36,7 +36,6 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebChromeClient.CustomViewCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -74,7 +73,7 @@ public class PlayerWebActivity extends AppBuilderModuleMain implements
     private enum PLAYER_STATES {
 
         STATE_PLAY, STATE_STOP, STATE_PAUSE
-    };
+    }
     private final int NEED_INTERNET_CONNECTION = 0;
     private final int INITIALIZATION_FAILED = 1;
     private final int LOADING_ABORTED = 2;
@@ -280,7 +279,6 @@ public class PlayerWebActivity extends AppBuilderModuleMain implements
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
-        //webView.getSettings().setPluginsEnabled(true);
         webView.getSettings().setSupportMultipleWindows(false);
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setUseWideViewPort(true);

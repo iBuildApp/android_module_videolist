@@ -14,7 +14,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -26,12 +25,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
@@ -422,79 +417,6 @@ public class VideoPlugin extends AppBuilderModuleMain implements
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.add("Facebook").setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                if (Authorization.isAuthorized(Authorization.AUTHORIZATION_TYPE_FACEBOOK)) {
-//                    shareFacebook(sharingPosition);
-//                } else {
-//                    action = ACTIONS.FACEBOOK_SHARE;
-//                    Authorization.authorize(VideoPlugin.this, FACEBOOK_AUTH, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-//                }
-//                needMenu = false;
-//                return true;
-//            }
-//        });
-//        menu.add("Twitter").setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                if (Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_TWITTER) != null) {
-//                    shareTwitter(sharingPosition);
-//                } else {
-//                    Authorization.authorize(VideoPlugin.this, TWITTER_AUTH, Authorization.AUTHORIZATION_TYPE_TWITTER);
-//                }
-//                needMenu = false;
-//                return true;
-//            }
-//        });
-//        menu.add("Email").setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " "
-//                        + items.get(sharingPosition).getUrl()
-//                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-//                        + " "
-//                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-//
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                emailIntent.setType("text/html");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(text));
-//                startActivity(emailIntent);
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add("SMS").setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " "
-//                        + items.get(sharingPosition).getUrl()
-//                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-//                        + Statics.APP_NAME + " "
-//                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-//                        + " "
-//                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-//
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
-//                intent.putExtra("sms_body", text);
-//                startActivity(intent);
-//
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
-//        menu.add(getString(R.string.romanblack_video_cancel)).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//            public boolean onMenuItemClick(MenuItem arg0) {
-//                needMenu = false;
-//
-//                return true;
-//            }
-//        });
 
         return false;
     }
