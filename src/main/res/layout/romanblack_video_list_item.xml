@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="127dp"
+              android:layout_height="wrap_content"
               android:background="#41464b"
               android:paddingTop="10dp"
               android:paddingBottom="10dp"
@@ -35,9 +35,8 @@
             </LinearLayout>
         
         </FrameLayout>
-                
-        <LinearLayout
-                    android:id="@+id/video_listview_bottom_layout"
+
+        <LinearLayou
                     android:layout_height="70dp"
                       android:layout_width="wrap_content"
                       android:layout_weight="1"
@@ -63,7 +62,7 @@
                       android:textColor="#afb2b5"
                       android:textSize="11dp"/>
             
-        </LinearLayout>
+        </LinearLayou>
         
         <LinearLayout android:id="@+id/romanblack_video_listview_item_comments_count_layput"
                       android:layout_height="30dp"
@@ -83,8 +82,10 @@
         </LinearLayout>
         
     </LinearLayout>
-    
-    <LinearLayout android:layout_height="27dp"
+
+    <LinearLayout
+        android:id="@+id/video_listview_bottom_layout"
+        android:layout_height="27dp"
                   android:layout_width="fill_parent"
                   android:orientation="horizontal">
                 
