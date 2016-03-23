@@ -31,6 +31,7 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
 import com.appbuilder.sdk.android.DialogSharing;
+import com.appbuilder.sdk.android.StartUpActivity;
 import com.appbuilder.sdk.android.Utils;
 import com.appbuilder.sdk.android.Widget;
 import com.appbuilder.sdk.android.authorization.Authorization;
@@ -62,6 +63,7 @@ import java.util.Map;
  * Main module class. Module entry point.
  * Represents video list, video stream widgets.
  */
+@StartUpActivity(moduleName = "Video")
 public class VideoPlugin extends AppBuilderModuleMain implements
         OnItemClickListener, View.OnClickListener,
         MediaAdapter.FBLikePressedListener, MediaAdapter.SharePressedListener,
