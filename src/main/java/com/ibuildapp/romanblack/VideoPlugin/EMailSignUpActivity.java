@@ -90,14 +90,14 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
     public void create() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.romanblack_video_emailsignup);
+        setContentView(R.layout.video_plugin_email_sign_up);
 
         DEFAULT_FIRST_NAME_TEXT = getString(R.string.romanblack_video_first_name);
         DEFAULT_LAST_NAME_TEXT = getString(R.string.romanblack_video_last_name);
         DEFAULT_EMAIL_TEXT = getString(R.string.romanblack_video_email);
         DEFAULT_PASSWORD_TEXT = getString(R.string.romanblack_video_password);
 
-        homeImageView = (TextView) findViewById(R.id.romanblack_fanwall_main_home);
+        homeImageView = (TextView) findViewById(R.id.video_plugin_email_sign_up_main_home);
         homeImageView.setOnClickListener(this);
 
         setTopBarTitle(getString(R.string.romanblack_video_registration));
@@ -109,43 +109,43 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
             }
         });
 
-        signUpimageView = (TextView) findViewById(R.id.romanblack_video_login_signuplabel);
+        signUpimageView = (TextView) findViewById(R.id.video_plugin_authorization_main_sign_up_label);
         signUpimageView.setOnClickListener(this);
 
-        firstNameEditText = (EditText) findViewById(R.id.romanblack_video_emailsignup_fname);
+        firstNameEditText = (EditText) findViewById(R.id.video_plugin_email_sign_up_first_name);
         firstNameEditText.addTextChangedListener(this);
         firstNameEditText.setOnFocusChangeListener(this);
         firstNameEditText.setText(DEFAULT_FIRST_NAME_TEXT);
         firstNameEditText.setTextColor(Color.GRAY);
 
-        lastNameEditText = (EditText) findViewById(R.id.romanblack_video_emailsignup_lname);
+        lastNameEditText = (EditText) findViewById(R.id.video_plugin_email_sign_up_last_name);
         lastNameEditText.addTextChangedListener(this);
         lastNameEditText.setOnFocusChangeListener(this);
         lastNameEditText.setText(DEFAULT_LAST_NAME_TEXT);
         lastNameEditText.setTextColor(Color.GRAY);
 
-        emailEditText = (EditText) findViewById(R.id.romanblack_video_emailsignup_email);
+        emailEditText = (EditText) findViewById(R.id.video_plugin_email_sign_up_email);
         emailEditText.addTextChangedListener(this);
         emailEditText.setOnFocusChangeListener(this);
         emailEditText.setText(DEFAULT_EMAIL_TEXT);
         emailEditText.setTextColor(Color.GRAY);
 
-        passwordEditText = (EditText) findViewById(R.id.romanblack_video_emailsignup_pwd);
+        passwordEditText = (EditText) findViewById(R.id.video_plugin_email_sign_up_password);
         passwordEditText.addTextChangedListener(this);
         passwordEditText.setOnFocusChangeListener(this);
         passwordEditText.setText(DEFAULT_PASSWORD_TEXT);
         passwordEditText.setTextColor(Color.GRAY);
 
-        rePasswordEditText = (EditText) findViewById(R.id.romanblack_video_emailsignup_rpwd);
+        rePasswordEditText = (EditText) findViewById(R.id.video_plugin_email_sign_up_confirm_password);
         rePasswordEditText.addTextChangedListener(this);
         rePasswordEditText.setOnFocusChangeListener(this);
         rePasswordEditText.setText(DEFAULT_PASSWORD_TEXT);
         rePasswordEditText.setTextColor(Color.GRAY);
 
-        termsCheckBox = (CheckBox) findViewById(R.id.romanblack_video_emailsignup_chbterms);
+        termsCheckBox = (CheckBox) findViewById(R.id.video_plugin_email_sign_up_terms_checkbox);
         termsCheckBox.setOnClickListener(this);
 
-        termsLayout = (LinearLayout) findViewById(R.id.romanblack_video_emailsignup_layouttems);
+        termsLayout = (LinearLayout) findViewById(R.id.video_plugin_email_sign_up_terms_layout);
         termsLayout.setVisibility(View.INVISIBLE);
 
         needCheckFields = true;
@@ -337,7 +337,7 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
     }
 
     public void onFocusChange(View arg0, boolean arg1) {
-        if (arg0.getId() == R.id.romanblack_video_emailsignup_fname) {
+        if (arg0.getId() == R.id.video_plugin_email_sign_up_first_name) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_FIRST_NAME_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -349,7 +349,7 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setTextColor(Color.GRAY);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailsignup_lname) {
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_last_name) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_LAST_NAME_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -361,7 +361,7 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setTextColor(Color.GRAY);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailsignup_email) {
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_email) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_EMAIL_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -373,7 +373,7 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setTextColor(Color.GRAY);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailsignup_pwd) {
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_password) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_PASSWORD_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -385,7 +385,7 @@ public class EMailSignUpActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setTextColor(Color.GRAY);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailsignup_rpwd) {
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_confirm_password) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_PASSWORD_TEXT)) {
                     ((TextView) arg0).setText("");

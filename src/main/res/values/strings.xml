@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MainActivity</string>
-    
     <string name="common_clean_upper">Clean</string>
     <string name="common_home_upper">Home</string>
     <string name="common_back_upper">Back</string>
-    <string name="common_authorization_upper">Authorization</string>
-    
-    <string name="romanblack_video_player_comments">Comments</string>
-    
-    <string name="romanblack_video_signup_email_in_use">This email is in use. Please use another email.</string>
-    
-    <string name="romanblack_video_no_comments_yet">There are no comments yet.</string>
-    <string name="romanblack_video_post_comment">Post your comment!</string>
+
+    <string name="video_plugin_comments">Comments</string>
     
     <string name="romanblack_video_main_capture">Video stream</string>
-    <string name="romanblack_video_player_capture">Video</string>
-    
-    <string name="romanblack_video_list_share">Share</string>
-    <string name="romanblack_video_list_like">Like</string>
+
+    <string name="video_plugin_main_list_share">SHARE</string>
     <string name="romanblack_video_loading">Loading...</string>
     <string name="romanblack_video_first_name">First name</string>
     <string name="romanblack_video_last_name">Last name</string>
     <string name="romanblack_video_email">Email</string>
     <string name="romanblack_video_password">Password</string>
-    <string name="romanblack_video_cancel">Cancel</string>
     <string name="romanblack_video_or">or</string>
     
     <string name="romanblack_video_login">Login</string>
@@ -34,27 +23,13 @@
     <string name="romanblack_video_login_failed">Failed to login.</string>
     <string name="romanblack_video_login_with_facebook">Login with Facebook</string>
     <string name="romanblack_video_login_with_twitter">Login with Twitter</string>
-    <string name="romanblack_video_login_with_ibuildapp">Login with iBuildApp</string>
-    <string name="romanblack_video_login_with_email">Login with Email</string>
-    <string name="romanblack_video_emaillogin_use_email">Use your e-mail to login.</string>
     <string name="romanblack_video_emailsignup_terms">By clicking on checkbox you are indicating that you have read and agree to the Terms of Use.</string>
-    
-    <string name="romanblack_video_date_just_now">Just now</string>
-    <string name="romanblack_video_date_one_minute">1 minute ago</string>
-    <string name="romanblack_video_date_minutes"> minutes ago</string>
-    <string name="romanblack_video_date_one_hour">1 hour ago</string>
-    <string name="romanblack_video_date_hours"> hours ago</string>
-    <string name="romanblack_video_date_yesterday">Yesterday</string>
-    <string name="romanblack_video_date_days"> days ago</string>
     
     <string name="romanblack_video_alert_cannot_init">Cannot initialize video plugin.</string>
     <string name="romanblack_video_alert_share_need_internet">You need an Internet connection to share data.</string>
-    <string name="romanblack_video_alert_like_need_internet">You need an Internet connection to make a like.</string>
     <string name="romanblack_video_alert_no_internet">Cellular Data is Turned off. Turn on cellular data or use Wi-Fi to access data</string>
-    <string name="romanblack_video_alert_link_not_valid">This Video Link Is Not Valid.</string>
     <string name="romanblack_video_alert_facebook_authorization_failed">Facebook authorization failed.</string>
     <string name="romanblack_video_alert_twitter_authorization_failed">Twitter authorization failed.</string>
-    <string name="romanblack_video_alert_email_authorization_failed">Email authorization failed.</string>
     <string name="romanblack_video_alert_email_invalid">Invalid Email</string>
     <string name="romanblack_video_alert_fill_all_fields">Fill in all the fields</string>
     <string name="romanblack_video_alert_names_match_each">First and Last name match each other. This seems like a spam, please change Last or First name.</string>
@@ -62,7 +37,6 @@
     <string name="romanblack_video_alert_enter_correct_email">Please enter correct email address.</string>
     <string name="romanblack_video_alert_short_password">Your password should have at least 2 characters.</string>
     <string name="romanblack_video_alert_passwords_dont_match">Your password should have at least 2 characters.</string>
-    <string name="romanblack_video_alert_press_play">Press play button</string>
     <string name="romanblack_video_alert_image_cannot_be_selected">This image cannot be selected</string>
     <string name="romanblack_video_alert_empty_message">Cannot send empty comment</string>
     <string name="romanblack_video_alert_message_is_too_long">Message is too long!</string>
@@ -77,37 +51,78 @@
     <string name="romanblack_video_sharingsms_second_part">video from the</string>
     <string name="romanblack_video_sharingsms_third_part">Android app and thought you would like it. Download the</string>
     <string name="romanblack_video_sharingsms_fourth_part">iPhone/Android app:</string>
-    <string name="zero_div_150">0/150</string>
-    <string name="login">Login</string>
-    <string name="home">Home</string>
     <string name="back">Back</string>
     <string name="signup">Sign up</string>
     <string name="post">Post</string>
-    <string name="clear">Clear</string>
     <string name="cancel">Сancel</string>
     <string name="loading">Loading</string>
     <string name="romanblack_video_signup_failed">The username and password did not match our records, please try again</string>
 	
-    <string name="vitamio_library_app_name">VitamioLibrary</string>
-    <string name="vitamio_init_decoders">Initializing decoders…</string>
-    <string name="permission_group_tools_label">Vitamio tools</string>
-    <string name="permission_group_tools_description">Access Vitamio package and resources.</string>
-    <string name="permission_receive_messages_label">Receive Vitamio messages</string>
-    <string name="permission_receive_messages_description">Receive all broadcasts from Vitamio service.</string>
-    <string name="permission_write_providers_label">Write Vitamio providers</string>
-    <string name="permission_write_providers_description">Delete, update or create new items in Vitamio providers.
-    </string>
-    <string name="VideoView_error_title">Cannot play video</string>
-    <string name="VideoView_error_text_invalid_progressive_playback">Sorry, this video is not valid for streaming to
-        this device.
-    </string>
-    <string name="VideoView_error_text_unknown">Sorry, this video cannot be played.</string>
-    <string name="VideoView_error_button">OK</string>
-    <string name="mediacontroller_play_pause">Play/Pause</string>
-
     <string name="directoryplugin_twitter_posted_success">Shared on Twitter</string>
     <string name="directoryplugin_facebook_posted_success">Shared on Facebook</string>
     <string name="directoryplugin_twitter_posted_error">Hasn\'t been shared on Twitter</string>
     <string name="directoryplugin_facebook_posted_error">Hasn\'t been shared on Facebook</string>
+    <string name="video_plugin_date_format">MM/dd/yy</string>
+    <string name="video_plugin_added">added</string>
+    <string name="video_plugin_send_text">Send</string>
+    <string name="video_plugin_back">ago</string>
+    <string name="video_plugin_add_comment">Add Comment</string>
+    <string name="video_plugin_no_comments">Add your first comment</string>
+
+    <plurals name="numberOfWeeks">
+        <item quantity="zero">%d weeks</item>
+        <item quantity="one">%d week</item>
+        <item quantity="few">%d weeks</item>
+        <item quantity="many">%d weeks</item>
+        <item quantity="other">%d weeks</item>
+    </plurals>
+
+    <plurals name="numberOfDays">
+        <item quantity="zero">%d days</item>
+        <item quantity="one">%d day</item>
+        <item quantity="few">%d days</item>
+        <item quantity="many">%d days</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+
+    <plurals name="numberOfHours">
+        <item quantity="zero">%d hours</item>
+        <item quantity="one">%d hour</item>
+        <item quantity="few">%d hours</item>
+        <item quantity="many">%d hours</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+
+    <plurals name="numberOfMinutes">
+        <item quantity="zero">%d minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="few">%d minutes</item>
+        <item quantity="many">%d minutes</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+
+    <plurals name="numberOfSeconds">
+        <item quantity="zero">%d seconds</item>
+        <item quantity="one">%d seconds</item>
+        <item quantity="few">%d seconds</item>
+        <item quantity="many">%d seconds</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+
+    <plurals name="numberOfComments">
+        <item quantity="zero">Add Comment</item>
+        <item quantity="one">Comments %d</item>
+        <item quantity="few">Comments %d</item>
+        <item quantity="many">Comments %d</item>
+        <item quantity="other">Comments %d</item>
+    </plurals>
+
+    <plurals name="inverseNumberOfComments">
+        <item quantity="zero">%d Comment</item>
+        <item quantity="one">%d Comment</item>
+        <item quantity="few">%d Comments</item>
+        <item quantity="many">%d Comments</item>
+        <item quantity="other">%d Comments</item>
+    </plurals>
 
 </resources>

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
 import com.appbuilder.sdk.android.authorization.Authorization;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,27 +87,31 @@ public class EMailAuthorizationActivity extends AppBuilderModuleMain implements
 
     @Override
     public void create() {
-        setContentView(R.layout.romanblack_video_email_auth);
+        setContentView(R.layout.video_plugin_email_authentification);
 
         DEFAULT_EMAIL_TEXT = getString(R.string.romanblack_video_email);
         DEFAULT_PASSWORD_TEXT = getString(R.string.romanblack_video_password);
 
         setTopBarTitle(getString(R.string.romanblack_video_login));
         swipeBlock();
-        setTopBarLeftButtonText(getResources().getString(R.string.common_back_upper), true, new View.OnClickListener() {
+        setTopBarTitleColor(Color.parseColor("#000000"));
+
+        setTopBarLeftButtonTextAndColor(getResources().getString(R.string.common_back_upper), Color.parseColor("#000000"), true, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        loginEditText = (EditText) findViewById(R.id.romanblack_video_emailauth_fname);
+        setTopBarBackgroundColor(Statics.color1);
+
+        loginEditText = (EditText) findViewById(R.id.video_plugin_email_authentication_first_name);
         loginEditText.setTextColor(Color.GRAY);
 
-        passwordEditText = (EditText) findViewById(R.id.romanblack_video_emailauth_lname);
+        passwordEditText = (EditText) findViewById(R.id.video_plugin_email_authentication_last_name);
         passwordEditText.setTextColor(Color.GRAY);
 
-        loginButton = (Button) findViewById(R.id.romanblack_video_emailauth_btn_sugnup);
+        loginButton = (Button) findViewById(R.id.video_plugin_email_authentication_sign_up_button);
         loginButton.setOnClickListener(this);
     }
 
@@ -155,9 +160,9 @@ public class EMailAuthorizationActivity extends AppBuilderModuleMain implements
     }
 
     public void onClick(View arg0) {
-        if (arg0.getId() == R.id.romanblack_fanwall_main_home) {
+        if (arg0.getId() == R.id.video_plugin_email_sign_up_main_home) {
             finish();
-        } else if (arg0.getId() == R.id.romanblack_video_emailauth_btn_sugnup) {
+        } else if (arg0.getId() == R.id.video_plugin_email_authentication_sign_up_button) {
             String regExpn =
                     "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                     + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
@@ -181,12 +186,12 @@ public class EMailAuthorizationActivity extends AppBuilderModuleMain implements
                     login();
                 }
             }).start();
-        } else if (arg0.getId() == R.id.romanblack_video_emailauth_fname) {
+        } else if (arg0.getId() == R.id.video_plugin_email_authentication_first_name) {
             if (loginEditText.getText().toString().equals(DEFAULT_EMAIL_TEXT)) {
                 loginEditText.setText("");
                 loginEditText.setTextColor(Color.BLACK);
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailauth_lname) {
+        } else if (arg0.getId() == R.id.video_plugin_email_authentication_last_name) {
             if (passwordEditText.getText().toString().equals(DEFAULT_PASSWORD_TEXT)) {
                 passwordEditText.setText("");
                 passwordEditText.setTextColor(Color.BLACK);
@@ -195,7 +200,7 @@ public class EMailAuthorizationActivity extends AppBuilderModuleMain implements
     }
 
     public void onFocusChange(View arg0, boolean arg1) {
-        if (arg0.getId() == R.id.romanblack_video_emailauth_fname) {
+        if (arg0.getId() == R.id.video_plugin_email_authentication_first_name) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_EMAIL_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -207,7 +212,7 @@ public class EMailAuthorizationActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setTextColor(Color.GRAY);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailauth_lname) {
+        } else if (arg0.getId() == R.id.video_plugin_email_authentication_last_name) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_PASSWORD_TEXT)) {
                     ((TextView) arg0).setText("");

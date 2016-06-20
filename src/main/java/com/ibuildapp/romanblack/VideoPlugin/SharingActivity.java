@@ -12,6 +12,7 @@ package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -24,6 +25,8 @@ import com.appbuilder.sdk.android.AppBuilderModuleMain;
 import com.appbuilder.sdk.android.Utils;
 import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.FacebookAuthorizationActivity;
+import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import twitter4j.Twitter;
@@ -82,10 +85,11 @@ public class SharingActivity extends AppBuilderModuleMain implements
             }
         }
     };
+    private View sharingLayout;
 
     @Override
     public void create() {
-        setContentView(R.layout.romanblack_video_sharing);
+        setContentView(R.layout.video_plugin_sharing);
 
         Intent currentIntent = getIntent();
 
@@ -104,12 +108,16 @@ public class SharingActivity extends AppBuilderModuleMain implements
         }
 
         swipeBlock();
-        setTopBarLeftButtonText(getResources().getString(R.string.common_back_upper), true, new View.OnClickListener() {
+        setTopBarTitleColor(Color.parseColor("#000000"));
+
+        setTopBarLeftButtonTextAndColor(getResources().getString(R.string.common_back_upper), Color.parseColor("#000000"), true, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+        setTopBarBackgroundColor(Statics.color1);
         setTopBarRightButtonText(getString(R.string.post), false, new OnClickListener() {
             public void onClick(View arg0) {
                 if ( !Utils.networkAvailable( SharingActivity.this ) )
@@ -122,7 +130,11 @@ public class SharingActivity extends AppBuilderModuleMain implements
             }
         });
 
-        mainEditText = (EditText) findViewById(R.id.romanblack_video_sharing_edittext);
+        sharingLayout = findViewById(R.id.video_plugin_sharing_main_layout);
+        mainEditText = (EditText) findViewById(R.id.video_plugin_sharing_edit_text);
+
+        sharingLayout.setBackgroundColor(Statics.color1);
+        mainEditText.setTextColor(Statics.color3);
 
         if (sharingType.equalsIgnoreCase("facebook")) {
             setTopBarTitle("Facebook");

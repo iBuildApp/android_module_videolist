@@ -15,32 +15,35 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings.Secure;
-import android.text.Html;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.*;
-import android.widget.AdapterView.OnItemClickListener;
-import com.appbuilder.sdk.android.AppBuilderModuleMain;
-import com.appbuilder.sdk.android.DialogSharing;
+import com.appbuilder.sdk.android.AppBuilderModuleMainAppCompat;
 import com.appbuilder.sdk.android.StartUpActivity;
 import com.appbuilder.sdk.android.Utils;
 import com.appbuilder.sdk.android.Widget;
 import com.appbuilder.sdk.android.authorization.Authorization;
-import com.appbuilder.sdk.android.authorization.FacebookAuthorizationActivity;
 import com.appbuilder.sdk.android.authorization.entities.User;
 import com.flurry.android.FlurryAgent;
+import com.ibuildapp.romanblack.VideoPlugin.adapters.MainAdapter;
 import com.ibuildapp.romanblack.VideoPlugin.callbacks.OnAuthListener;
 import com.ibuildapp.romanblack.VideoPlugin.callbacks.OnCommentPushedListener;
 import com.ibuildapp.romanblack.VideoPlugin.callbacks.OnPostListener;
+import com.ibuildapp.romanblack.VideoPlugin.callbacks.SharePressedListener;
+import com.ibuildapp.romanblack.VideoPlugin.model.CommentItem;
+import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
+import com.ibuildapp.romanblack.VideoPlugin.utils.EntityParser;
+import com.ibuildapp.romanblack.VideoPlugin.utils.ShareUtils;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
+import com.ibuildapp.romanblack.VideoPlugin.utils.VideoPluginConstants;
+
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -55,21 +58,16 @@ import org.apache.http.params.HttpParams;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Main module class. Module entry point.
  * Represents video list, video stream widgets.
  */
 @StartUpActivity(moduleName = "Video")
-public class VideoPlugin extends AppBuilderModuleMain implements
-        OnItemClickListener, View.OnClickListener,
-        MediaAdapter.FBLikePressedListener, MediaAdapter.SharePressedListener,
+public class VideoPlugin extends AppBuilderModuleMainAppCompat implements
+        View.OnClickListener, SharePressedListener,
         OnPostListener, OnAuthListener, OnCommentPushedListener {
 
-    public static final int VIDEO_PLAYER = 10002;
     private final int INITIALIZATION_FAILED = 0;
     private final int LOADING_ABORTED = 1;
     private final int SHOW_PROGRESS_DIALOG = 2;
@@ -77,26 +75,17 @@ public class VideoPlugin extends AppBuilderModuleMain implements
     private final int SHOW_MEDIA_LIST = 4;
     private final int REFRESH_LIST = 5;
     private final int PING = 6;
-    private final int GET_OG_LIKES = 7;
-    private final int COLORS_RECIEVED = 8;
-    private final int FACEBOOK_AUTH = 10000;
-    private final int TWITTER_AUTH = 10001;
-    private final int SHARING_FACEBOOK = 10002;
-    private final int SHARING_TWITTER = 10003;
-    private ACTIONS action = ACTIONS.ACTION_NONE;
+    private final int COLORS_RECEIVED = 8;
+
     private boolean destroyed = false;
-    private boolean needMenu = false;
-    private int likePosition = 0;
-    private int sharingPosition = 0;
     private String cachePath = "";
     public static String userID = null;
     private Widget widget = null;
-    private MediaAdapter adapter = null;
     private LinearLayout mainLayout = null;
     private TextView homeBtn = null;
-    private ListView listView = null;
+    private RecyclerView listView = null;
     private ProgressDialog progressDialog = null;
-    private ArrayList<VideoItem> items = new ArrayList<VideoItem>();
+    private ArrayList<VideoItem> items = new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -129,36 +118,30 @@ public class VideoPlugin extends AppBuilderModuleMain implements
                     showMediaList();
                 }
                 break;
-                case REFRESH_LIST: {
-                    refreshList();
-                }
-                break;
                 case PING: {
                     ping();
                 }
                 break;
-                case GET_OG_LIKES: {
-                    getOgLikes();
-                }
-                break;
-                case COLORS_RECIEVED: {
-                    colorsRecieved();
+                case COLORS_RECEIVED: {
+                    colorsReceived();
                 }
                 break;
             }
         }
     };
-    private WebView webView;
+    private int sharePosition;
 
     @Override
     public void create() {
 
-        Log.d("", "");
-        setContentView(R.layout.romanblack_video_main);
+        setContentView(R.layout.video_plugin_main);
 
         // topbar initialization
         setTopBarTitle(getString(R.string.romanblack_video_main_capture));
-        setTopBarLeftButtonText(getResources().getString(R.string.common_home_upper), true, new View.OnClickListener() {
+
+        setTopBarTitleColor(Color.parseColor("#000000"));
+
+        setTopBarLeftButtonTextAndColor(getResources().getString(R.string.common_home_upper), Color.parseColor("#000000"), true, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -171,6 +154,7 @@ public class VideoPlugin extends AppBuilderModuleMain implements
             String uId = lastPart.substring(lastPart.indexOf("u") + 1, lastPart.indexOf("p"));
             userID = uId;
         } catch (Throwable thr) {
+            thr.printStackTrace();
         }
 
         Intent currentIntent = getIntent();
@@ -194,14 +178,11 @@ public class VideoPlugin extends AppBuilderModuleMain implements
             setTopBarTitle(getResources().getString(R.string.romanblack_video_main_capture));
         }
 
-        if (Utils.networkAvailable(VideoPlugin.this))
-            Statics.isOnline = true;
-        else
-            Statics.isOnline = false;
+        Statics.isOnline = Utils.networkAvailable(VideoPlugin.this);
 
-        homeBtn = (TextView) findViewById(R.id.romanblack_fanwall_main_home);
-        listView = (ListView) findViewById(R.id.romanblack_video_main_listview);
-        mainLayout = (LinearLayout) findViewById(R.id.romanblack_video_main_layout);
+        homeBtn = (TextView) findViewById(R.id.video_plugin_email_sign_up_main_home);
+        listView = (RecyclerView) findViewById(R.id.video_plugin_main_list_view);
+        mainLayout = (LinearLayout) findViewById(R.id.video_plugin_main_layout);
 
         cachePath = widget.getCachePath() + "/video-" + widget.getOrder();
         File cache = new File(this.cachePath);
@@ -215,8 +196,6 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         new Thread() {
             @Override
             public void run() {
-
-
                 EntityParser parser;
 
                 if (widget.getPluginXmlData() != null) {
@@ -245,27 +224,12 @@ public class VideoPlugin extends AppBuilderModuleMain implements
                 Statics.color3 = parser.getColor3();
                 Statics.color4 = parser.getColor4();
                 Statics.color5 = parser.getColor5();
+                Statics.isLight = parser.isLight();
 
-                handler.sendEmptyMessage(COLORS_RECIEVED);
+                handler.sendEmptyMessage(COLORS_RECEIVED);
 
-                for (int i = 0; i < items.size(); i++) {
+                for (int i = 0; i < items.size(); i++)
                     items.get(i).setTextColor(widget.getTextColor());
-                }
-
-                // зачем то почистил каш директорию
-                File dir = new File(cachePath);
-                String[] files = dir.list();
-                if (files != null) {
-                    for (int i = 0; i < files.length; i++) {
-                        String filename = files[i];
-                        boolean fl = false;
-
-                        if (fl == false) {
-                            File file = new File(cachePath + "/" + filename);
-                            file.delete();
-                        }
-                    }
-                }
 
                 handler.sendEmptyMessage(SHOW_MEDIA_LIST);
             }
@@ -275,9 +239,6 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         Statics.onPostListeners.add(this);
     }
 
-    @Override
-    public void start() {
-    }
 
     @Override
     public void destroy() {
@@ -288,139 +249,38 @@ public class VideoPlugin extends AppBuilderModuleMain implements
             Statics.onPostListeners.remove(this);
             Statics.onCommentPushedListeners.remove(this);
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
-    }
-
-    /**
-     * Starts playing video with given position.
-     * @param position video position
-     */
-    void startPlayer(int position) {
-        if (userID != null && userID.equals("186589")) {
-            Map<String, String> maps = new HashMap<String, String>();
-            maps.put("Watch", items.get(position).getTitle());
-            FlurryAgent.logEvent("VideoPlugin", maps, true);
-        }
-
-        if (items.get(position).getUrl().contains("youtube.com")) {
-            this.startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.youtube.com")).setData(Uri.parse(items.get(position).getUrl())));
-            return;
-        }
-        if (items.get(position).getUrl().contains("vimeo.com")) {
-            this.startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse(items.get(position).getUrl())));
-            return;
-        }
-
-        if (items.get(position).getUrl().contains("m3u8")
-                || items.get(position).getUrl().contains("mp4")) {
-            Intent it = new Intent(this, VideoBuffer.class);
-            it.putExtra("position", position);
-            it.putExtra("items", items);
-            it.putExtra("Widget", widget);
-            this.startActivityForResult(it, VideoPlugin.VIDEO_PLAYER);
-            return;
-        }
-
-        Intent it = new Intent(this, PlayerWebActivity.class);
-        it.putExtra("position", position);
-        it.putExtra("items", items);
-        it.putExtra("Widget", widget);
-        this.startActivity(it);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == FACEBOOK_AUTH) {
+        if (requestCode == VideoPluginConstants.FACEBOOK_AUTH_SHARE) {
             if (resultCode == RESULT_OK) {
                 if (Authorization.isAuthorized(Authorization.AUTHORIZATION_TYPE_FACEBOOK)) {
-                    if (action == ACTIONS.FACEBOOK_LIKE) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    boolean res = FacebookAuthorizationActivity.like(items.get(likePosition).getUrl());
-                                    if ( res )
-                                    {
-                                        items.get(likePosition).setLikesCount(items.get(likePosition).getLikesCount() + 1);
-                                        items.get(likePosition).setLiked(true);
-
-                                        handler.sendEmptyMessage(REFRESH_LIST);
-                                    }
-                                } catch (FacebookAuthorizationActivity.FacebookNotAuthorizedException e) {
-
-                                } catch (FacebookAuthorizationActivity.FacebookAlreadyLiked facebookAlreadyLiked) {
-                                    items.get(likePosition).setLiked(true);
-                                    handler.sendEmptyMessage(REFRESH_LIST);
-                                }
-                            }
-                        }).start();
-                    } else if (action == ACTIONS.FACEBOOK_SHARE) {
-                        shareFacebook(sharingPosition);
-                    }
+                        ShareUtils.shareFacebook(this, items.get(sharePosition));
                     onAuth();
                 }
             }
-        } else if (requestCode == TWITTER_AUTH) {
+        } else if (requestCode == VideoPluginConstants.TWITTER_AUTH) {
             if (resultCode == RESULT_OK) {
                 if (Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_TWITTER) != null) {
-                    shareTwitter(sharingPosition);
+                    ShareUtils.shareTwitter(this, items.get(sharePosition));
                 }
             }
-        } else if (requestCode == VIDEO_PLAYER) {
-            Intent intent = data;
-            try {
-                Bundle bundle = intent.getExtras();
-                List<VideoItem> items = (List<VideoItem>) bundle.getSerializable("items");
-                int position = bundle.getInt("position");
-                if (userID != null && userID.equals("186589")) {
-                    FlurryAgent.endTimedEvent("VideoPlugin");
-                }
-                if (resultCode == Statics.PLAY_NEXT_VIDEO) {
-                    if (position + 1 >= items.size()) {
-                        position = 0;
-                    } else {
-                        position++;
-                    }
-                    startPlayer(position);
-                } else if (resultCode == Statics.PLAY_PREV_VIDEO) {
-                    if (position - 1 < 0) {
-                        position = items.size() - 1;
-                    } else {
-                        position--;
-                    }
-                    startPlayer(position);
-                }
-            } catch (Exception e) {
-            }
-        } else if ( requestCode == SHARING_FACEBOOK )
-        {
+        } else if ( requestCode == VideoPluginConstants.SHARING_FACEBOOK ) {
             if ( resultCode == RESULT_OK )
                 Toast.makeText(VideoPlugin.this, getString(R.string.directoryplugin_facebook_posted_success), Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(VideoPlugin.this, getString(R.string.directoryplugin_facebook_posted_error), Toast.LENGTH_SHORT).show();
-        } else if ( requestCode == SHARING_TWITTER )
-        {
+        } else if ( requestCode == VideoPluginConstants.SHARING_TWITTER ) {
             if ( resultCode == RESULT_OK )
                 Toast.makeText(VideoPlugin.this, getString(R.string.directoryplugin_twitter_posted_success), Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(VideoPlugin.this, getString(R.string.directoryplugin_twitter_posted_error), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * This menu contains share via Facebook, Twitter, Email, SMS buttons.
-     * Also it contains "cancel" button.
-     * @param menu
-     * @return true
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        return false;
     }
 
     @Override
@@ -431,16 +291,6 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         }
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return needMenu;
-    }
-
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        needMenu = false;
-    }
-
     /**
      * Shows media list after parsing.
      */
@@ -449,94 +299,13 @@ public class VideoPlugin extends AppBuilderModuleMain implements
             return;
         }
 
-        adapter = new MediaAdapter(this, items, widget);
+        MainAdapter adapter = new MainAdapter(this, items, widget);
         adapter.setCachePath(cachePath);
-        adapter.setfBLikePressedListener(this);
         adapter.setSharePressedListener(this);
+        listView.setLayoutManager(new LinearLayoutManager(this));
         listView.setAdapter(adapter);
 
-        Statics.onCommentPushedListeners.add(this);
-
-        listView.setOnItemClickListener(this);
-
-        handler.sendEmptyMessage(GET_OG_LIKES);
-
-        new Thread(new Runnable() {
-            public void run() {
-                HashMap<String, String> commentCounts =
-                        JSONParser.getVideoCommentsCount();
-
-                for (int i = 0; i < items.size(); i++) {
-                    int count = 0;
-
-                    try {
-                        String key = items.get(i).getId() + "";
-
-                        count = Integer.parseInt(commentCounts.get(key));
-                    } catch (Exception ex) {
-                        Log.d("", "");
-                    }
-
-                    items.get(i).setTotalComments(count);
-                }
-
-                handler.sendEmptyMessage(REFRESH_LIST);
-
-                HashMap<String, String> likesCounts =
-                        JSONParser.getVideoLikesCount(items);
-
-                if ( likesCounts != null )
-                {
-                    for (int i = 0; i < items.size(); i++) {
-                        try {
-                            String iCountS =
-                                    likesCounts.get(items.get(i).getUrl());
-                            items.get(i).setLikesCount(Integer.parseInt(iCountS));
-                        } catch (Exception ex) {
-                            Log.d("", "");
-                        }
-                    }
-                }
-                handler.sendEmptyMessage(REFRESH_LIST);
-            }
-        }).start();
-
         handler.sendEmptyMessage(HIDE_PROGRESS_DIALOG);
-    }
-
-    /**
-     * Refreshes media list.
-     */
-    private void refreshList() {
-        try {
-            adapter.notifyDataSetChanged();
-        } catch (Exception ex) {
-        }
-    }
-
-    /**
-     * Prepares videos open graph likes.
-     */
-    private void getOgLikes() {
-        if (Authorization.isAuthorized(Authorization.AUTHORIZATION_TYPE_FACEBOOK)) {
-            new Thread(new Runnable() {
-                public void run() {
-                    ArrayList<String> urls = JSONParser.getUserOgLikes();
-
-                    for (int i = 0; i < items.size(); i++) {
-                        for (int j = 0; j < urls.size(); j++) {
-                            if (items.get(i).getUrl().equalsIgnoreCase(urls.get(j))) {
-                                items.get(i).setLiked(true);
-
-                                break;
-                            }
-                        }
-                    }
-
-                    handler.sendEmptyMessage(REFRESH_LIST);
-                }
-            }).start();
-        }
     }
 
     /**
@@ -595,46 +364,15 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         }).start();
     }
 
-    /**
-     * Calling when module colors was recieved.
-     */
-    private void colorsRecieved() {
+
+    private void colorsReceived() {
+        setTopBarBackgroundColor(Statics.color1);
         mainLayout.setBackgroundColor(Statics.color1);
-        listView.setDivider(new ColorDrawable(Color.parseColor(Statics.color1 == android.R.color.white ? "#66000000" : "#33000000")));
-        listView.setDividerHeight(1);
-    }
-
-    /**
-     * Starts share on facebook activity.
-     * @param position video position
-     */
-    private void shareFacebook(int position) {
-        Intent it = new Intent(this, SharingActivity.class);
-        it.putExtra("type", "facebook");
-        it.putExtra("link", items.get(position).getUrl());
-        it.putExtra("item", items.get(position));
-        startActivityForResult(it, SHARING_FACEBOOK);
-
-    }
-
-    /**
-     * Starts share on twitter activity.
-     * @param position video position
-     */
-    private void shareTwitter(int position) {
-        Intent it = new Intent(this, SharingActivity.class);
-        it.putExtra("type", "twitter");
-        it.putExtra("link", items.get(position).getUrl());
-        it.putExtra("item", items.get(position));
-        startActivityForResult(it, SHARING_TWITTER);
     }
 
     private void showProgressDialog() {
-        try {
-            if (progressDialog.isShowing()) {
-                return;
-            }
-        } catch (NullPointerException nPEx) {
+        if (progressDialog == null || progressDialog.isShowing()) {
+            return;
         }
 
         progressDialog = ProgressDialog.show(this, null, getString(R.string.romanblack_video_loading), true);
@@ -658,121 +396,21 @@ public class VideoPlugin extends AppBuilderModuleMain implements
         finish();
     }
 
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-    }
-
     public void onClick(View arg0) {
         if (arg0 == homeBtn) {
             finish();
         }
     }
 
-    public void onLikePressed(final int position) {
-        if (Authorization.isAuthorized(Authorization.AUTHORIZATION_TYPE_FACEBOOK)) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        boolean res = FacebookAuthorizationActivity.like(items.get(position).getUrl());
-                        if ( res )
-                        {
-                            items.get(position).setLikesCount(items.get(position).getLikesCount() + 1);
-                            items.get(position).setLiked(true);
-
-                            handler.sendEmptyMessage(REFRESH_LIST);
-                        }
-                    } catch (FacebookAuthorizationActivity.FacebookNotAuthorizedException e) {
-                        action = ACTIONS.FACEBOOK_LIKE;
-                        likePosition = position;
-                        Authorization.authorize(VideoPlugin.this, FACEBOOK_AUTH, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-                    } catch (FacebookAuthorizationActivity.FacebookAlreadyLiked facebookAlreadyLiked) {
-                        items.get(position).setLiked(true);
-                        handler.sendEmptyMessage(REFRESH_LIST);
-                    }
-                }
-            }).start();
-        } else {
-            action = ACTIONS.FACEBOOK_LIKE;
-            likePosition = position;
-
-            Authorization.authorize(this, FACEBOOK_AUTH, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-        }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
     }
 
     public void onSharePressed(int position) {
-        sharingPosition = position;
-
-        needMenu = true;
-
-        showDialogSharing(new DialogSharing.Configuration.Builder()
-                        .setFacebookSharingClickListener(new DialogSharing.Item.OnClickListener() {
-                            @Override
-                            public void onClick() {
-                                if (Authorization.isAuthorized(Authorization.AUTHORIZATION_TYPE_FACEBOOK)) {
-                                    shareFacebook(sharingPosition);
-                                } else {
-                                    action = ACTIONS.FACEBOOK_SHARE;
-                                    Authorization.authorize(VideoPlugin.this, FACEBOOK_AUTH, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-                                }
-                                needMenu = false;
-                            }
-                        })
-                        .setTwitterSharingClickListener(new DialogSharing.Item.OnClickListener() {
-                            @Override
-                            public void onClick() {
-                                if (Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_TWITTER) != null) {
-                                    shareTwitter(sharingPosition);
-                                } else {
-                                    Authorization.authorize(VideoPlugin.this, TWITTER_AUTH, Authorization.AUTHORIZATION_TYPE_TWITTER);
-                                }
-                                needMenu = false;
-                            }
-                        })
-                        .setEmailSharingClickListener(new DialogSharing.Item.OnClickListener() {
-                            @Override
-                            public void onClick() {
-                                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " "
-                                        + items.get(sharingPosition).getUrl()
-                                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-                                        + Statics.APP_NAME + " "
-                                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-                                        + Statics.APP_NAME + " "
-                                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-                                        + " "
-                                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-
-                                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                                emailIntent.setType("text/html");
-                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(text));
-                                startActivity(emailIntent);
-
-                                needMenu = false;
-                            }
-                        })
-                        .setSmsSharingClickListener(new DialogSharing.Item.OnClickListener() {
-                            @Override
-                            public void onClick() {
-                                String text = getResources().getString(R.string.romanblack_video_sharingsms_first_part) + " "
-                                        + items.get(sharingPosition).getUrl()
-                                        + " " + getResources().getString(R.string.romanblack_video_sharingsms_second_part) + " "
-                                        + Statics.APP_NAME + " "
-                                        + getResources().getString(R.string.romanblack_video_sharingsms_third_part)
-                                        + Statics.APP_NAME + " "
-                                        + getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
-                                        + " "
-                                        + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
-
-                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
-                                intent.putExtra("sms_body", text);
-                                startActivity(intent);
-
-                                needMenu = false;
-                            }
-                        })
-                        .build()
-        );
-
-//        openOptionsMenu();
+        sharePosition = position;
+        ShareUtils.onSharePressed(this, items.get(position));
     }
 
     public void onPost() {
@@ -783,7 +421,6 @@ public class VideoPlugin extends AppBuilderModuleMain implements
     public void onAuth() {
         handler.removeMessages(PING);
         handler.sendEmptyMessage(PING);
-        handler.sendEmptyMessage(GET_OG_LIKES);
     }
 
     public void onCommentPushed(CommentItem item) {
@@ -815,10 +452,5 @@ public class VideoPlugin extends AppBuilderModuleMain implements
                 return;
             }
         }
-    }
-
-    private enum ACTIONS {
-
-        FACEBOOK_LIKE, FACEBOOK_SHARE, ACTION_NONE
     }
 }

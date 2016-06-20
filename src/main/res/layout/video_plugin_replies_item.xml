@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp">
+
+        <com.ibuildapp.romanblack.VideoPlugin.view.CircularImageView
+            android:id="@+id/video_plugin_replies_item_avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/video_plugin_replies_item_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:id="@+id/video_plugin_replies_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_alignBaseline="@+id/video_plugin_replies_item_author"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:alpha="0.5"
+                    android:layout_toRightOf="@+id/video_plugin_replies_item_author"/>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/video_plugin_replies_item_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="13dp"
+                android:textSize="14sp"
+                android:alpha="0.7"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:id="@+id/video_plugin_replies_item_separator"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

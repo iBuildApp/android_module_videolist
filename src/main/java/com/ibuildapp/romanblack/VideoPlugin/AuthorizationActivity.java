@@ -12,6 +12,7 @@ package com.ibuildapp.romanblack.VideoPlugin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.appbuilder.sdk.android.AppBuilderModuleMain;
 import com.appbuilder.sdk.android.authorization.Authorization;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,44 +91,45 @@ public class AuthorizationActivity extends AppBuilderModuleMain implements
 
     @Override
     public void create() {
-        setContentView(R.layout.romanblack_video_authorization_main);
+        setContentView(R.layout.video_plugin_authorization_main);
 
         DEFAULT_EMAIL_TEXT = getString(R.string.romanblack_video_email);
         DEFAULT_PASSWORD_TEXT = getString(R.string.romanblack_video_password);
 
-        btnFacebookAuth = findViewById(R.id.romanblack_video_login_facebookbtn);
+        btnFacebookAuth = findViewById(R.id.video_plugin_authorization_main_facebook_button);
         btnFacebookAuth.setOnClickListener(this);
 
-        btnTwitterAuth = findViewById(R.id.romanblack_video_login_twitterbtn);
+        btnTwitterAuth = findViewById(R.id.video_plugin_authorization_main_twitter_button);
         btnTwitterAuth.setOnClickListener(this);
 
-        btnEmailAuth = findViewById(R.id.romanblack_video_login_emailbtn);
+        btnEmailAuth = findViewById(R.id.video_plugin_authorization_main_email_button);
         btnEmailAuth.setOnClickListener(this);
 
-        btnEmailAuthTextView = (TextView) findViewById(R.id.romanblack_video_login_emailbtn_text);
+        btnEmailAuthTextView = (TextView) findViewById(R.id.video_plugin_authorization_main_email_button_text);
         btnEmailAuthTextView.setText(Html.fromHtml("<u>" + getString(R.string.romanblack_video_have_an_account) + "</u>"));
 
-        btnSignUp = (TextView) findViewById(R.id.romanblack_video_login_signuplabel);
+        btnSignUp = (TextView) findViewById(R.id.video_plugin_authorization_main_sign_up_label);
         btnSignUp.setOnClickListener(this);
 
-        emailEditText = (EditText) findViewById(R.id.romanblack_video_login_email);
+        emailEditText = (EditText) findViewById(R.id.video_plugin_authorization_main_email);
         emailEditText.addTextChangedListener(this);
 
-        passwordEditText = (EditText) findViewById(R.id.romanblack_video_login_password);
+        passwordEditText = (EditText) findViewById(R.id.video_plugin_authorization_main_password);
         passwordEditText.addTextChangedListener(this);
 
         // set topbar title
         setTopBarTitle(getString(R.string.romanblack_video_login));
         swipeBlock();
-        setTopBarLeftButtonText(getResources().getString(R.string.common_back_upper), true, new View.OnClickListener() {
+        setTopBarTitleColor(Color.parseColor("#000000"));
+
+        setTopBarLeftButtonTextAndColor(getResources().getString(R.string.common_back_upper), Color.parseColor("#000000"), true, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        if (!com.appbuilder.sdk.android.Statics.BASE_DOMEN.contains("ibuildapp.com")) {
-        }
+        setTopBarBackgroundColor(Statics.color1);
 
         needCheckFields = true;
     }
@@ -253,14 +256,14 @@ public class AuthorizationActivity extends AppBuilderModuleMain implements
 
     /*Listeners interface methods*/
     public void onClick(View arg0) {
-        if (arg0.getId() == R.id.romanblack_video_login_facebookbtn) {
+        if (arg0.getId() == R.id.video_plugin_authorization_main_facebook_button) {
             Authorization.authorize(this, FACEBOOK_AUTHORIZATION_REQUEST_CODE, Authorization.AUTHORIZATION_TYPE_FACEBOOK);
-        } else if (arg0.getId() == R.id.romanblack_video_login_twitterbtn) {
+        } else if (arg0.getId() == R.id.video_plugin_authorization_main_twitter_button) {
             Authorization.authorize(this, TWITTER_AUTHORIZATION_REQUEST_CODE, Authorization.AUTHORIZATION_TYPE_TWITTER);
-        } else if (arg0.getId() == R.id.romanblack_video_login_emailbtn) {
+        } else if (arg0.getId() == R.id.video_plugin_authorization_main_email_button) {
             Intent emailIntent = new Intent(this, EMailAuthorizationActivity.class);
             startActivityForResult(emailIntent, EMAIL_AUTHORIZATION_REQUEST_CODE);
-        } else if (arg0.getId() == R.id.romanblack_video_login_signuplabel) {
+        } else if (arg0.getId() == R.id.video_plugin_authorization_main_sign_up_label) {
             if (signUpActive) {
                 handler.sendEmptyMessage(SHOW_PROGRESS_DIALOG);
 
@@ -283,13 +286,13 @@ public class AuthorizationActivity extends AppBuilderModuleMain implements
                     }
                 }).start();
             }
-        } else if (arg0.getId() == R.id.romanblack_fanwall_main_home) {// Home image
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_main_home) {// Home image
             finish();
         }
     }
 
     public void onFocusChange(View arg0, boolean arg1) {
-        if (arg0.getId() == R.id.romanblack_video_emailsignup_email) {
+        if (arg0.getId() == R.id.video_plugin_email_sign_up_email) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_EMAIL_TEXT)) {
                     ((TextView) arg0).setText("");
@@ -299,7 +302,7 @@ public class AuthorizationActivity extends AppBuilderModuleMain implements
                     ((TextView) arg0).setText(DEFAULT_EMAIL_TEXT);
                 }
             }
-        } else if (arg0.getId() == R.id.romanblack_video_emailsignup_pwd) {
+        } else if (arg0.getId() == R.id.video_plugin_email_sign_up_password) {
             if (arg1) {
                 if (((TextView) arg0).getText().toString().equals(DEFAULT_PASSWORD_TEXT)) {
                     ((TextView) arg0).setText("");

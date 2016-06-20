@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/video_plugin_details_vimeo_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <WebView
+        android:id="@+id/video_plugin_details_vimeo_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.ibuildapp.romanblack.VideoPlugin.view.VideoImageView
+        android:id="@+id/video_plugin_details_vimeo_image_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:visibility="gone"/>
+</LinearLayout>

@@ -1,33 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ibuildapp.romanblack.VideoPlugin">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-sdk tools:overrideLibrary="wseemann.media"/>
 
     <application>
         <activity
             android:name="com.ibuildapp.romanblack.VideoPlugin.VideoPlugin"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
         </activity>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.CommentsActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.CommentsToCommentActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.VideoPlayer"/>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.FacebookAuthorizationActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.TwitterAuthorizationActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="com.ibuildapp.romanblack.VideoPlugin.EMailAuthorizationActivity"
             android:screenOrientation="portrait"/>
@@ -35,18 +18,23 @@
             android:name="com.ibuildapp.romanblack.VideoPlugin.EMailSignUpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"/>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.SendMessageActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
-        <activity
-            android:name="com.ibuildapp.romanblack.VideoPlugin.PlayerWebActivity"
-            android:configChanges="orientation"/>
         <activity android:name="com.ibuildapp.romanblack.VideoPlugin.SharingActivity"
+        android:screenOrientation="portrait"/>
+        <activity android:name=".details.VideoDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name="com.ibuildapp.romanblack.VideoPlugin.VideoBuffer"
+        <activity android:name="com.ibuildapp.romanblack.VideoPlugin.details.InnerFullscreenActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name="com.ibuildapp.romanblack.VideoPlugin.details.VimeoFullscreenActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".replies.RepliesActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
+
         <activity android:name="com.ibuildapp.romanblack.VideoPlugin.AuthorizationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"/>

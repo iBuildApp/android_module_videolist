@@ -10,8 +10,8 @@
 ****************************************************************************/
 package com.ibuildapp.romanblack.VideoPlugin.callbacks;
 
-import com.ibuildapp.romanblack.VideoPlugin.CommentItem;
-import com.ibuildapp.romanblack.VideoPlugin.VideoItem;
+import com.ibuildapp.romanblack.VideoPlugin.model.CommentItem;
+import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
 import java.util.ArrayList;
 
 /**

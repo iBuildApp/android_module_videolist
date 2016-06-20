@@ -16,6 +16,9 @@ import android.content.Intent;
 import android.util.Log;
 import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.entities.User;
+import com.ibuildapp.romanblack.VideoPlugin.model.CommentItem;
+import com.ibuildapp.romanblack.VideoPlugin.utils.JSONParser;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
 
 /**
  * This class receives information about comment updates.
