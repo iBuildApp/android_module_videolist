@@ -36,7 +36,8 @@ public class YouTubeViewHolder extends MainViewHolder{
         durationLayout.setVisibility(View.VISIBLE);
         durationText.setText(currentItem.getXmlDuration());
 
-        final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+        Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
+      /*  final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
         if (fileExists(filePath)){
             YouTubeResponse response = SerializableUtils.readSerializable(filePath);
             currentItem.setResponse(response);
@@ -58,7 +59,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         }
                     });
         } else
-            onYouTubeDataLoad(currentItem.getResponse());
+            onYouTubeDataLoad(currentItem.getResponse());*/
     }
 
     private boolean fileExists(String filePath) {
