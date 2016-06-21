@@ -10,10 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.ibuildapp.romanblack.VideoPlugin.view.VideoImageView
-        android:id="@+id/video_plugin_details_vimeo_image_stub"
+    <FrameLayout
+        android:id="@+id/video_plugin_details_vimeo_image_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:visibility="gone"/>
+        android:visibility="gone">
+        <com.ibuildapp.romanblack.VideoPlugin.view.VideoImageView
+            android:id="@+id/video_plugin_details_vimeo_image_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_height="50dp"
+                android:layout_width="50dp">
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/video_plugin_circle_no_border_drawable"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/video_list_play_little"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
 </LinearLayout>
