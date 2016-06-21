@@ -11,6 +11,7 @@
 package com.ibuildapp.romanblack.VideoPlugin.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import android.graphics.Color;
 import android.speech.tts.UtteranceProgressListener;
@@ -38,6 +39,8 @@ public class VideoItem implements Serializable {
     private VimeoResponse vimeoResponse;
     private String uploadDuration;
     public volatile boolean isLoading = false;
+    private String xmlDuration = "";
+    private Long creationLong = new Date().getTime();
 
     /**
      * Constructs new video item instance.
@@ -247,5 +250,21 @@ public class VideoItem implements Serializable {
 
     public void setUploadDuration(String uploadDuration) {
         this.uploadDuration = uploadDuration;
+    }
+
+    public void setXmlDuration(String trim) {
+        this.xmlDuration = trim;
+    }
+
+    public void setCreationLong(Long creationLong) {
+        this.creationLong = creationLong;
+    }
+
+    public Long getCreationLong() {
+        return creationLong * 1000;
+    }
+
+    public String getXmlDuration() {
+        return xmlDuration;
     }
 }
