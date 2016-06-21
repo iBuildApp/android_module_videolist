@@ -37,13 +37,13 @@ public class YouTubeViewHolder extends MainViewHolder{
         durationText.setText(currentItem.getXmlDuration());
 
         Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
-       /// final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+       // final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
        /* if (fileExists(filePath)){
             YouTubeResponse response = SerializableUtils.readSerializable(filePath);
             currentItem.setResponse(response);
         }*/
 
-       /* if (currentItem.getResponse() == null) {
+        if (currentItem.getResponse() == null) {
             thumbImageView.setImageBitmap(null);
 
             String videoId = YouTubeUtils.getVideoId(currentItem.getUrl());
@@ -64,7 +64,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         }
                     });
         } else
-            onYouTubeDataLoad(currentItem.getResponse());*/
+            onYouTubeDataLoad(currentItem.getResponse());
     }
 
     private boolean fileExists(String filePath) {
