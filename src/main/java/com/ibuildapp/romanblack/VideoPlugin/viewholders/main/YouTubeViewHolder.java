@@ -37,7 +37,7 @@ public class YouTubeViewHolder extends MainViewHolder{
         durationText.setText(currentItem.getXmlDuration());
 
         Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
-      /*  final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+        final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
         if (fileExists(filePath)){
             YouTubeResponse response = SerializableUtils.readSerializable(filePath);
             currentItem.setResponse(response);
@@ -47,9 +47,14 @@ public class YouTubeViewHolder extends MainViewHolder{
             thumbImageView.setImageBitmap(null);
 
             String videoId = YouTubeUtils.getVideoId(currentItem.getUrl());
-            api.getVideoInfo(videoId)
-                    .compose(RxUtils.<YouTubeResponse>applyCustomSchedulers(Schedulers.io(), Schedulers.computation()))
+            api.getVideoInfo(videoId).subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.newThread())
                     .subscribe(new SimpleSubscriber<YouTubeResponse>() {
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                        }
 
                         @Override
                         public void onNext(YouTubeResponse youTubeResponse) {
@@ -59,7 +64,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         }
                     });
         } else
-            onYouTubeDataLoad(currentItem.getResponse());*/
+            onYouTubeDataLoad(currentItem.getResponse());
     }
 
     private boolean fileExists(String filePath) {
