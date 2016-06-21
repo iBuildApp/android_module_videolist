@@ -23,6 +23,7 @@ import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.model.YouTubeResponse
  * Entity class that represents parsed video item.
  */
 public class VideoItem implements Serializable {
+
     private long id = 0;
     private String title = "";
     private String url = "";
