@@ -36,12 +36,12 @@ public class YouTubeViewHolder extends MainViewHolder{
         durationLayout.setVisibility(View.VISIBLE);
         durationText.setText(currentItem.getXmlDuration());
 
-        Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
-        final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
-        if (fileExists(filePath)){
+       // Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
+       /// final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+       /* if (fileExists(filePath)){
             YouTubeResponse response = SerializableUtils.readSerializable(filePath);
             currentItem.setResponse(response);
-        }
+        }*/
 
         if (currentItem.getResponse() == null) {
             thumbImageView.setImageBitmap(null);
@@ -59,7 +59,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         @Override
                         public void onNext(YouTubeResponse youTubeResponse) {
                             currentItem.setResponse(youTubeResponse);
-                            SerializableUtils.saveSerializable(youTubeResponse, filePath);
+                            //SerializableUtils.saveSerializable(youTubeResponse, filePath);
                             onYouTubeDataLoad(youTubeResponse);
                         }
                     });
