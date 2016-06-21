@@ -1,7 +1,6 @@
 package com.ibuildapp.romanblack.VideoPlugin.utils;
 
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.ibuildapp.romanblack.VideoPlugin.R;
@@ -24,6 +23,55 @@ public class DateUtils {
         }
     }
 
+    /*NSTimeInterval tInterval = [[NSDate date] timeIntervalSinceDate:dateToCompare];
+  NSTimeInterval dayDiff = floor(tInterval / 86400.0f);
+
+  if(dayDiff < 0.0f) {
+    return NSLocalizedString(@"core_formatTimeIntervalJustNow", @"Just Now");
+  }
+  else if(tInterval < 60.0f) {
+    return NSLocalizedString(@"core_formatTimeIntervalJustNow", @"Just Now");
+  }
+  else if(tInterval < 120.0f) {
+    return NSLocalizedString(@"core_formatTimeIntervalOneMinuteAgo", @"1 minute ago");
+  }
+  else if(tInterval < 3600.0f) {
+    NSNumber *number = [NSNumber numberWithFloat:floor(tInterval / 60.0f)];
+    return [NSString stringWithFormat:SLPluralizedString(@"core_formatTimeIntervalSomeMinutesAgo_%@ minutes ago", number, nil), number];
+  }
+  else if(tInterval < 7200.0f) {
+    return NSLocalizedString(@"core_formatTimeIntervalOneHourAgo", @"1 hour ago");
+  }
+  else if(tInterval < 86400.0f) {
+    NSNumber *number = [NSNumber numberWithFloat:floor(tInterval / 3600.0f)];
+    return [NSString stringWithFormat:SLPluralizedString(@"core_formatTimeIntervalSomeHoursAgo_%@ hours ago", number, nil), number];
+  }
+  else if(dayDiff == 1.0f) {
+    return NSLocalizedString(@"core_formatTimeIntervalYesterday", @"Yesterday");
+  }
+  else if(dayDiff < 4.0f) {
+    NSNumber *number = [NSNumber numberWithFloat:dayDiff];
+    return [NSString stringWithFormat:SLPluralizedString(@"core_formatTimeIntervalSomeDaysAgo_%@ days ago", number, nil), number];
+  }
+  else {
+
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateStyle:NSDateFormatterLongStyle];
+
+    NSString *str = [dateFormat stringFromDate:dateToCompare];
+    [dateFormat setDateStyle:NSDateFormatterNoStyle];
+    [dateFormat setTimeStyle:NSDateFormatterShortStyle];
+    str = [str stringByAppendingFormat" %@ %@", NSLocalizedString(@"core_formatTimeIntervalAt", @"At"), [dateFormat stringFromDate:dateToCompare]];
+
+    [dateFormat release];
+
+    return str;
+  }
+
+  return @"";
+}*/
+
     public static String getAgoDate(Context ctx, Long publishedMills){
         if (OUT_FORMAT == null)
             OUT_FORMAT = new SimpleDateFormat(ctx.getString(R.string.video_plugin_date_format), Locale.getDefault());
@@ -33,10 +81,17 @@ public class DateUtils {
         if (secDiff > 60*60*24*30)
             return ctx.getString(R.string.video_plugin_added)+ " " + OUT_FORMAT.format(new Date(publishedMills));
 
+        if(secDiff < 60.0f)
+            return ctx.getString(R.string.video_plugin_just_now);
+
+
         if (secDiff > 60*60*24*7) {
             int weeks = Math.abs((int) (secDiff/(60*60*24*7)));
             return ctx.getResources().getQuantityString(R.plurals.numberOfWeeks, weeks, weeks);
         }
+
+        if ((int)(secDiff / 86400.0f) == 1)
+            return ctx.getString(R.string.video_plugin_yesterday);
 
         if (secDiff > 60*60*24) {
             int days = Math.abs((int) (secDiff/(60*60*24)));
@@ -116,7 +171,7 @@ public class DateUtils {
         if (OUT_FORMAT == null)
             OUT_FORMAT = new SimpleDateFormat(ctx.getString(R.string.video_plugin_date_format), Locale.getDefault());
 
-        Long secDiff = (new Date().getTime() - publishedMills)/1000;
+        Long secDiff = Math.abs(new Date().getTime() - publishedMills)/1000;
 
         if (secDiff > 60*60*24*30)
             return ctx.getString(R.string.video_plugin_added)+ " " + OUT_FORMAT.format(new Date(publishedMills));

@@ -67,7 +67,10 @@
     <string name="video_plugin_send_text">Отпр.</string>
     <string name="video_plugin_back">назад</string>
     <string name="video_plugin_add_comment">Добавить комментарий</string>
-    <string name="video_plugin_no_comments">Добавьте Ваш комментарий</string>
+    <string name="video_plugin_no_comments">Сообщений пока нет</string>
+    <string name="video_plugin_just_now">Только что</string>
+    <string name="video_plugin_yesterday">Вчера</string>
+    <string name="video_plugin_edit_hint">Введите комментарий…</string>
 
     <plurals name="numberOfWeeks">
         <item quantity="zero">%d недель</item>

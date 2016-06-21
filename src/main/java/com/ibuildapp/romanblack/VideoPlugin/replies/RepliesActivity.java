@@ -99,7 +99,6 @@ public class RepliesActivity extends AppBuilderModuleMainAppCompat {
                         onDataLoaded(commentsData);
                     }
                 });
-
     }
 
     private void onDataLoaded(CommentsData commentsData){

@@ -67,7 +67,10 @@
     <string name="video_plugin_send_text">Send</string>
     <string name="video_plugin_back">ago</string>
     <string name="video_plugin_add_comment">Add Comment</string>
-    <string name="video_plugin_no_comments">Add your first comment</string>
+    <string name="video_plugin_no_comments">There are no messages yet</string>
+    <string name="video_plugin_just_now">Just now</string>
+    <string name="video_plugin_yesterday">Yesterday</string>
+    <string name="video_plugin_edit_hint">Enter comment...</string>
 
     <plurals name="numberOfWeeks">
         <item quantity="zero">%d weeks</item>

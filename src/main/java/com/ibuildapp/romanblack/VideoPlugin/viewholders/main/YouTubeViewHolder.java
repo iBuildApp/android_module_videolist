@@ -3,17 +3,17 @@ package com.ibuildapp.romanblack.VideoPlugin.viewholders.main;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.ibuildapp.romanblack.VideoPlugin.R;
 import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.YouTubeApi;
 import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.YouTubeUtils;
-import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.model.ContentDetails;
-import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.model.Snippet;
 import com.ibuildapp.romanblack.VideoPlugin.api.youtubeapi.model.YouTubeResponse;
 import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
 import com.ibuildapp.romanblack.VideoPlugin.utils.DateUtils;
+import com.ibuildapp.romanblack.VideoPlugin.utils.SerializableUtils;
+import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
 import com.ibuildapp.romanblack.VideoPlugin.utils.rx.RxUtils;
 import com.ibuildapp.romanblack.VideoPlugin.utils.rx.SimpleSubscriber;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import rx.schedulers.Schedulers;
@@ -31,6 +31,17 @@ public class YouTubeViewHolder extends MainViewHolder{
     public void postView(final int position, final ArrayList<VideoItem> items) {
         final VideoItem currentItem = items.get(position);
 
+        final String agoString = DateUtils.getAgoDateWithAgo(postTime.getContext(), items.get(position).getCreationLong());
+        postTime.setText(agoString);
+        durationLayout.setVisibility(View.VISIBLE);
+        durationText.setText(currentItem.getXmlDuration());
+
+        final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+        if (fileExists(filePath)){
+            YouTubeResponse response = SerializableUtils.readSerializable(filePath);
+            currentItem.setResponse(response);
+        }
+
         if (currentItem.getResponse() == null) {
             thumbImageView.setImageBitmap(null);
 
@@ -42,6 +53,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         @Override
                         public void onNext(YouTubeResponse youTubeResponse) {
                             currentItem.setResponse(youTubeResponse);
+                            SerializableUtils.saveSerializable(youTubeResponse, filePath);
                             onYouTubeDataLoad(youTubeResponse);
                         }
                     });
@@ -49,24 +61,19 @@ public class YouTubeViewHolder extends MainViewHolder{
             onYouTubeDataLoad(currentItem.getResponse());
     }
 
+    private boolean fileExists(String filePath) {
+        File file = new File(filePath);
+        return file.exists();
+    }
+
     private void onYouTubeDataLoad(YouTubeResponse response) {
         final String url = response.getItems()[0].getSnippet().getThumbnails().getHigh().getUrl();
-        Snippet snippet = response.getItems()[0].getSnippet();
-        snippet.setPublishedDate(DateUtils.parsYouTubeDate(snippet.getPublishedAt()));
-        final String agoString = DateUtils.getAgoDateWithAgo(durationLayout.getContext(), snippet.getPublishedDate().getTime());
-
-        ContentDetails details = response.getItems()[0].getContentDetails();
-        final String parsedDuration = DateUtils.parseYouTubeDuration(details.getDuration());
-        details.setParsedDuration(parsedDuration);
 
         durationLayout.post(new Runnable() {
             @Override
             public void run() {
                 if (!url.equals(""))
                     Glide.with(durationLayout.getContext()).load(url).dontAnimate().into(thumbImageView);
-
-                postTime.setText(agoString);
-                durationText.setText(parsedDuration);
             }
         });
     }

@@ -33,7 +33,5 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$RetrofitGsonConverterVersion"
 
     compile "com.seppius.plurals:android-i18n-plurals:$AndroidI18NPluralsVersion"
-    compile 'com.github.wseemann:FFmpegMediaMetadataRetriever:1.0.9'
-
     compile "com.android.support:recyclerview-v7:$RecyclerViewVersion"
 }

@@ -31,7 +31,7 @@ import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
  */
 public class EntityParser {
 
-    private ArrayList<VideoItem> items = new ArrayList<VideoItem>();
+    private ArrayList<VideoItem> items = new ArrayList<>();
     private int color1 = Color.parseColor("#4d4948");// background
     private int color2 = Color.parseColor("#fff58d");// category header
     private int color3 = Color.parseColor("#fff7a2");// text header
@@ -200,6 +200,24 @@ public class EntityParser {
             public void end(String body) {
                 if (item != null) {
                     item.setTitle(body.trim());
+                }
+            }
+        });
+
+        media.getChild("duration").setEndTextElementListener(new EndTextElementListener() {
+            @Override
+            public void end(String body) {
+                if (item != null) {
+                    item.setXmlDuration(body.trim());
+                }
+            }
+        });
+
+        media.getChild("creation_time").setEndTextElementListener(new EndTextElementListener() {
+            @Override
+            public void end(String body) {
+                if (item != null) {
+                    item.setCreationLong(Long.valueOf(body.trim()));
                 }
             }
         });

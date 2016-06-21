@@ -190,6 +190,8 @@ public class VideoPlugin extends AppBuilderModuleMainAppCompat implements
             cache.mkdirs();
         }
 
+        Statics.setCachePath(cachePath);
+
         handler.sendEmptyMessage(PING);
         handler.sendEmptyMessage(SHOW_PROGRESS_DIALOG);
 

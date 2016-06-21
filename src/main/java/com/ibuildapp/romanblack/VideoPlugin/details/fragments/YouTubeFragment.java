@@ -48,7 +48,6 @@ public class YouTubeFragment extends Fragment{
                 if (!b) {
                     player = youTubePlayer;
                     youTubePlayer.cueVideo(YouTubeUtils.getVideoId(currentItem.getUrl()));
-
                 }
             }
 

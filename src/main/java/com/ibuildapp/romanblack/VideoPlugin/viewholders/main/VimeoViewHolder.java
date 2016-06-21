@@ -18,11 +18,8 @@ import rx.schedulers.Schedulers;
 
 
 public class VimeoViewHolder extends MainViewHolder{
-    private VimeoApi api;
     public VimeoViewHolder(View v, VimeoApi vimeoApi) {
         super(v);
-
-        this.api = vimeoApi;
     }
 
     @Override
@@ -33,7 +30,12 @@ public class VimeoViewHolder extends MainViewHolder{
                 .dontAnimate()
                 .into(thumbImageView);
 
-        if (currentItem.getVimeoResponse() == null) {
+        final String agoString = DateUtils.getAgoDateWithAgo(postTime.getContext(), items.get(position).getCreationLong());
+
+        postTime.setText(agoString);
+        durationLayout.setVisibility(View.VISIBLE);
+        durationText.setText(currentItem.getXmlDuration());
+        /*if (currentItem.getVimeoResponse() == null) {
             api.getVideoInfo(currentItem.getUrl())
                     .compose(RxUtils.<VimeoResponse>applyCustomSchedulers(Schedulers.io(), Schedulers.computation()))
                     .subscribe(new SimpleSubscriber<VimeoResponse>() {
@@ -45,28 +47,6 @@ public class VimeoViewHolder extends MainViewHolder{
                         }
                     });
         }else
-            onVimeoDataLoad(items.get(position).getVimeoResponse());
-    }
-
-    private void onVimeoDataLoad(final VimeoResponse response) {
-        if (response.getPostDate()== null) {
-            Date postDate = DateUtils.parseVimeoDate(response.getUploadDate());
-            response.setPostDate(postDate);
-        }
-
-        if (response.getParsedDuration() == null){
-            String parsedDuration = DateUtils.parseStringDurationFromLong(Long.valueOf(response.getDuration())*1000);
-            response.setParsedDuration(parsedDuration);
-        }
-        final String agoString = DateUtils.getAgoDateWithAgo(postTime.getContext(), response.getPostDate().getTime());
-        postTime.post(new Runnable() {
-            @Override
-            public void run() {
-
-                postTime.setText(agoString);
-                durationLayout.setVisibility(View.VISIBLE);
-                durationText.setText(response.getParsedDuration());
-            }
-        });
+            onVimeoDataLoad(items.get(position).getVimeoResponse());*/
     }
 }

@@ -68,6 +68,7 @@ public class Statics {
     public static ArrayList<OnCommentPushedListener> onCommentPushedListeners =
             new ArrayList<>();
     public static boolean isLight;
+    private static String cachePath;
     /* Presed callbacks ends */
 
     public static Bitmap appyColorFilterForResource(Context context, int resourceId, int color, PorterDuff.Mode mode ){
@@ -137,6 +138,14 @@ public class Statics {
                 }
             }
         }
+    }
+
+    public static void setCachePath(String cachePath) {
+        Statics.cachePath = cachePath;
+    }
+
+    public static String getCachePath() {
+        return cachePath;
     }
 
     public enum STATES {
