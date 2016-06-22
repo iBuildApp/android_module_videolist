@@ -10,7 +10,6 @@ import com.ibuildapp.romanblack.VideoPlugin.model.VideoItem;
 import com.ibuildapp.romanblack.VideoPlugin.utils.DateUtils;
 import com.ibuildapp.romanblack.VideoPlugin.utils.SerializableUtils;
 import com.ibuildapp.romanblack.VideoPlugin.utils.Statics;
-import com.ibuildapp.romanblack.VideoPlugin.utils.rx.RxUtils;
 import com.ibuildapp.romanblack.VideoPlugin.utils.rx.SimpleSubscriber;
 
 import java.io.File;
@@ -37,11 +36,11 @@ public class YouTubeViewHolder extends MainViewHolder{
         durationText.setText(currentItem.getXmlDuration());
 
         Glide.with(durationLayout.getContext()).load(currentItem.getCoverUrl()).dontAnimate().into(thumbImageView);
-       // final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
-       /* if (fileExists(filePath)){
+        final String filePath = Statics.getCachePath() + File.separator + String.valueOf(currentItem.getId());
+        if (fileExists(filePath)){
             YouTubeResponse response = SerializableUtils.readSerializable(filePath);
             currentItem.setResponse(response);
-        }*/
+        }
 
         if (currentItem.getResponse() == null) {
             thumbImageView.setImageBitmap(null);
@@ -59,7 +58,7 @@ public class YouTubeViewHolder extends MainViewHolder{
                         @Override
                         public void onNext(YouTubeResponse youTubeResponse) {
                             currentItem.setResponse(youTubeResponse);
-                            //SerializableUtils.saveSerializable(youTubeResponse, filePath);
+                            SerializableUtils.saveSerializable(youTubeResponse, filePath);
                             onYouTubeDataLoad(youTubeResponse);
                         }
                     });
