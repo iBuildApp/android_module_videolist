@@ -49,10 +49,12 @@ public abstract class ShareUtils {
                                 + Statics.APP_NAME + " "
                                 + context.getResources().getString(R.string.romanblack_video_sharingsms_fourth_part)
                                 + " "
-                                + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID;
+                                + "http://ibuildapp.com/projects.php?action=info&projectid=" + Statics.APP_ID
+                                + " \n" + (com.appbuilder.sdk.android.Statics.showLink ? context.getString(R.string.video_plugin_send_from_ibuildapp) : "");
 
                         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                         emailIntent.setType("text/html");
+                        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, item.getTitle());
                         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(text));
                         context.startActivity(emailIntent);
                     }

@@ -71,6 +71,7 @@
     <string name="video_plugin_just_now">Just now</string>
     <string name="video_plugin_yesterday">Yesterday</string>
     <string name="video_plugin_edit_hint">Enter comment...</string>
+    <string name="video_plugin_send_from_ibuildapp">send from iBuildApp</string>
 
     <plurals name="numberOfWeeks">
         <item quantity="zero">%d weeks</item>

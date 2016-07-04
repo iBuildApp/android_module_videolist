@@ -172,6 +172,12 @@ public class DetailsInfoFragment extends Fragment {
         api.postComment(String.valueOf(currentItem.getId()), textForPost)
                 .compose(RxUtils.<CommentsData>applyCustomSchedulers(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .subscribe(new SimpleSubscriber<CommentsData>(){
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+
                     @Override
                     public void onNext(CommentsData commentsData) {
                         adapter.addNewItem(commentsData);

@@ -1,6 +1,8 @@
 package com.ibuildapp.romanblack.VideoPlugin.api.ibaapi;
 
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,6 +27,9 @@ public class IbaApiService {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .writeTimeout(2000000, TimeUnit.MILLISECONDS )
+                .readTimeout(2000000, TimeUnit.MILLISECONDS )
+                .connectTimeout(2000000, TimeUnit.MILLISECONDS )
                 .build();
 
         return new Retrofit.Builder()
