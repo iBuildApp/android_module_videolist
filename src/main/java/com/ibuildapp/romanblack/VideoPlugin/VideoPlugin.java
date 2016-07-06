@@ -31,7 +31,7 @@ import com.appbuilder.sdk.android.Utils;
 import com.appbuilder.sdk.android.Widget;
 import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.entities.User;
-import com.flurry.android.FlurryAgent;
+//import com.flurry.android.FlurryAgent;
 import com.ibuildapp.romanblack.VideoPlugin.adapters.MainAdapter;
 import com.ibuildapp.romanblack.VideoPlugin.callbacks.OnAuthListener;
 import com.ibuildapp.romanblack.VideoPlugin.callbacks.OnCommentPushedListener;
@@ -288,9 +288,9 @@ public class VideoPlugin extends AppBuilderModuleMainAppCompat implements
     @Override
     public void resume() {
         handler.sendEmptyMessage(REFRESH_LIST);
-        if (userID != null && userID.equals("186589")) {
+        /*if (userID != null && userID.equals("186589")) {
             FlurryAgent.endTimedEvent("VideoPlugin");
-        }
+        }*/
     }
 
     /**
