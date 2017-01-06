@@ -166,7 +166,7 @@ public class VideoPlugin extends AppBuilderModuleMainAppCompat implements
         }
 
         if (widget.getPluginXmlData().length() == 0) {
-            if (currentIntent.getStringExtra("WidgetFile").length() == 0) {
+            if (widget.getPathToXmlFile().length() == 0) {
                 handler.sendEmptyMessageDelayed(INITIALIZATION_FAILED, 3000);
                 return;
             }
@@ -200,17 +200,12 @@ public class VideoPlugin extends AppBuilderModuleMainAppCompat implements
             public void run() {
                 EntityParser parser;
 
-                if (widget.getPluginXmlData() != null) {
-                    if (widget.getPluginXmlData().length() > 0) {
+                if (widget.getPluginXmlData() != null && widget.getPluginXmlData().length() > 0) {
                         parser = new EntityParser(widget.getPluginXmlData());
                     } else {
-                        String xmlData = readXmlFromFile(getIntent().getStringExtra("WidgetFile"));
+                        String xmlData = readXmlFromFile(widget.getPathToXmlFile());
                         parser = new EntityParser(xmlData);
                     }
-                } else {
-                    String xmlData = readXmlFromFile(getIntent().getStringExtra("WidgetFile"));
-                    parser = new EntityParser(xmlData);
-                }
 
                 parser.parse();
                 items = parser.getItems();
