@@ -11,6 +11,7 @@
         android:layout_weight="1" />
 
     <LinearLayout
+        android:id="@+id/video_plugin_details_info_edit_text_visibility"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="#FFF"
