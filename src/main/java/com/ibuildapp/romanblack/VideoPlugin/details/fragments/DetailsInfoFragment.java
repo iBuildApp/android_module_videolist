@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.appbuilder.sdk.android.authorization.Authorization;
 import com.appbuilder.sdk.android.authorization.FacebookAuthorizationActivity;
@@ -46,6 +47,7 @@ public class DetailsInfoFragment extends Fragment {
 
     private View sendButton;
     private EditText messageText;
+    private LinearLayout sendLayout;
     private boolean isVimeo;
 
     @Nullable
@@ -57,13 +59,18 @@ public class DetailsInfoFragment extends Fragment {
         list = (RecyclerView) fragment.findViewById(R.id.video_plugin_details_info_list);
         sendButton = fragment.findViewById(R.id.video_plugin_details_info_send_button);
         messageText = (EditText) fragment.findViewById(R.id.video_plugin_details_info_edit_text);
-
+        sendLayout = (LinearLayout) fragment.findViewById(R.id.video_plugin_details_info_edit_text_visibility);
         api = new IbaApi();
 
         Bundle args = getArguments();
         currentItem = (VideoItem) args.getSerializable(VideoPluginConstants.ITEM);
         isVimeo = args.getBoolean(VideoPluginConstants.VIMEO);
         initData();
+        if (Statics.commentsOn.equals("off")) {
+            sendLayout.setVisibility(View.GONE);
+        } else {
+            sendLayout.setVisibility(View.VISIBLE);
+        }
         return fragment;
     }
 
