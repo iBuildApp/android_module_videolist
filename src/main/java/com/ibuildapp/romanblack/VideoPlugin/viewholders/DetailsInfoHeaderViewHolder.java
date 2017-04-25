@@ -113,6 +113,20 @@ public class DetailsInfoHeaderViewHolder extends DetailsInfoViewHolder{
 
         if (data.getData().size() == 0)
             noCommentsLayout.setVisibility(View.VISIBLE);
-        else noCommentsLayout.setVisibility(View.GONE);
+        else
+            noCommentsLayout.setVisibility(View.GONE);
+
+        if(Statics.commentsOn.equals("off"))
+        {
+            noCommentsLayout.setVisibility(View.GONE);
+            comments.setVisibility(View.GONE);
+            topSeparator.setVisibility(View.GONE);
+            bottomSeparator.setVisibility(View.GONE);
+        }   else
+        {
+            comments.setVisibility(View.VISIBLE);
+            topSeparator.setVisibility(View.VISIBLE);
+            bottomSeparator.setVisibility(View.VISIBLE);
+        }
     }
 }
