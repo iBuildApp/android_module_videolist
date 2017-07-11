@@ -78,7 +78,7 @@ public class IbaApi {
             accountType = "ibuildapp";
 
         String accountId = Authorization.getAuthorizedUser().getAccountId();
-        String username = Authorization.getAuthorizedUser().getUserName();
+        String username = Authorization.getAuthorizedUser().getFullName();
         String url = Authorization.getAuthorizedUser().getAvatarUrl();
 
         return ibaApi.postComment(appId,
@@ -111,7 +111,7 @@ public class IbaApi {
                 parentId,
                 accountType,
                 Authorization.getAuthorizedUser().getAccountId(),
-                Authorization.getAuthorizedUser().getUserName(),
+                Authorization.getAuthorizedUser().getFullName(),
                 Authorization.getAuthorizedUser().getAvatarUrl(),
                 message);
     }

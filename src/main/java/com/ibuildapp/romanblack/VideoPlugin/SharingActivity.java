@@ -179,7 +179,7 @@ public class SharingActivity extends AppBuilderModuleMain implements
 
             handler.sendEmptyMessage(SHOW_PROGRESS_DIALOG);
 
-            text = Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_FACEBOOK).getUserName() + " "
+            text = Authorization.getAuthorizedUser(Authorization.AUTHORIZATION_TYPE_FACEBOOK).getFullName() + " "
                     + getString(R.string.romanblack_video_sharing_first_part) + " "
                     + link + " " + getString(R.string.romanblack_video_sharing_second_part) + " "
                     + Statics.APP_NAME

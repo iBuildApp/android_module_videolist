@@ -15,8 +15,18 @@ public class IbaApiService {
     public IbaApiService(String domain){
         baseUrl = domain;
         if(!baseUrl.contains("http"))
+        {
             baseUrl = "http://"+baseUrl;
-
+        }
+     /*   else
+        {
+            if(!baseUrl.contains("https"))
+            {
+                String tmp = "http";
+                 baseUrl = baseUrl.replaceAll(tmp,"https");
+            }
+        }
+*/
         baseUrl+='/';
     }
 
