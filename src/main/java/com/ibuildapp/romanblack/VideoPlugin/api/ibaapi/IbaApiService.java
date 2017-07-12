@@ -14,11 +14,11 @@ public class IbaApiService {
 
     public IbaApiService(String domain){
         baseUrl = domain;
-        if(!baseUrl.contains("http"))
+  /*      if(!baseUrl.contains("http"))
         {
             baseUrl = "http://"+baseUrl;
-        }
-     /*   else
+        }*/
+    /*    else
         {
             if(!baseUrl.contains("https"))
             {
